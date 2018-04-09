@@ -1,3 +1,4 @@
+DUNE   ?= jbuilder
 PANDOC ?= pandoc
 
 PACKAGE :=
@@ -15,7 +16,7 @@ all: build
 build: $(TARGETS)
 
 check:
-	@echo "not implemented"; exit 2 # TODO
+	$(DUNE) runtest
 
 dist:
 	@echo "not implemented"; exit 2 # TODO
@@ -28,6 +29,7 @@ uninstall:
 
 clean:
 	@rm -f *~ $(TARGETS)
+	$(DUNE) clean
 
 distclean: clean
 

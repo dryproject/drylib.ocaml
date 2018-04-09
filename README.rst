@@ -12,13 +12,13 @@ DRYlib for OCaml
 
 |
 
-http://drylib.org
+https://drylib.org
 
 Prerequisites
 =============
 
 * `OCaml <https://en.wikipedia.org/wiki/OCaml>`__
-  4.05+
+  4.06+
 
 Features
 ========
