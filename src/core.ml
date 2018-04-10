@@ -9,7 +9,7 @@ module Char = struct
 end
 
 module Datum = struct
-  type t
+  type t (* TODO *)
 end
 
 module Float32 = struct
@@ -39,7 +39,7 @@ module Int64 = struct
 end
 
 module Int128 = struct
-  type t
+  type t (* TODO *)
 end
 
 module Int = Int64
@@ -49,11 +49,11 @@ module Integer = struct
 end
 
 module Interval = struct
-  type t
+  type t (* TODO *)
 end
 
 module Matrix = struct
-  type t
+  type t (* TODO *)
 end
 
 module Natural = struct
@@ -61,11 +61,11 @@ module Natural = struct
 end
 
 module Number = struct
-  type t
+  type t (* TODO *)
 end
 
 module Quantity = struct
-  type t
+  type t (* TODO *)
 end
 
 module Rational = struct
@@ -77,7 +77,7 @@ module Real = struct
 end
 
 module Scalar = struct
-  type t
+  type t (* TODO *)
 end
 
 module Symbol = struct
@@ -85,15 +85,15 @@ module Symbol = struct
 end
 
 module Tensor = struct
-  type t
+  type t (* TODO *)
 end
 
 module Unit = struct
-  type t
+  type t (* TODO *)
 end
 
 module Vector = struct
-  type t
+  type t (* TODO *)
 end
 
 module Word8 = struct
