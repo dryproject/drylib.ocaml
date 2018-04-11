@@ -2,10 +2,16 @@
 
 module Bool : sig
   type t = bool
+
+  val of_bool : bool -> t
 end
 
 module Char : sig
-  type t = int
+  type t = Uchar.t
+
+  val of_char : char -> t
+
+  val of_int : int -> t
 end
 
 module Complex : sig
@@ -16,36 +22,52 @@ end
 
 module Float32 : sig
   type t = float
+
+  val of_float : float -> t
 end
 
 module Float64 : sig
   type t = float
+
+  val of_float : float -> t
 end
 
 module Float : sig
   type t =
     | Float32 of Float32.t
     | Float64 of Float64.t
+
+  val of_float : float -> t
 end
 
 module Int8 : sig
   type t = int
+
+  val of_int : int -> t
 end
 
 module Int16 : sig
   type t = int
+
+  val of_int : int -> t
 end
 
 module Int32 : sig
   type t = int32
+
+  val of_int : int -> t
 end
 
 module Int64 : sig
   type t = int64
+
+  val of_int : int -> t
 end
 
 module Int128 : sig
   type t
+
+  val of_int : int -> t
 end
 
 module Int : sig
@@ -55,10 +77,14 @@ module Int : sig
     | Int32 of Int32.t
     | Int64 of Int64.t
     | Int128 of Int128.t
+
+  val of_int : int -> t
 end
 
 module Integer : sig
   type t
+
+  val of_int : int -> t
 end
 
 module Interval : sig
@@ -71,6 +97,8 @@ end
 
 module Natural : sig
   type t = Integer.t
+
+  val of_int : int -> t
 end
 
 (*module Number*)
@@ -81,10 +109,14 @@ end
 
 module Rational : sig
   type t
+
+  val of_int : int -> t
 end
 
 module Real : sig
   type t
+
+  val of_float : float -> t
 end
 
 (*module Scalar*)
@@ -104,19 +136,19 @@ module Vector : sig
 end
 
 module Word8 : sig
-  type t = int
+  type t
 end
 
 module Word16 : sig
-  type t = int
+  type t
 end
 
 module Word32 : sig
-  type t = int32
+  type t
 end
 
 module Word64 : sig
-  type t = int64
+  type t
 end
 
 module Word : sig
@@ -136,6 +168,10 @@ module Number : sig
     | Natural of Natural.t
     | Rational of Rational.t
     | Real of Real.t
+
+  val of_float : float -> t
+
+  val of_int : int -> t
 end
 
 module Scalar : sig
@@ -143,6 +179,10 @@ module Scalar : sig
     | Bool of Bool.t
     | Char of Char.t
     | Number of Number.t
+
+  val of_float : float -> t
+
+  val of_int : int -> t
 end
 
 module Tensor : sig
@@ -150,6 +190,10 @@ module Tensor : sig
     | Scalar of Scalar.t
     | Vector of Vector.t
     | Matrix of Matrix.t
+
+  val of_float : float -> t
+
+  val of_int : int -> t
 end
 
 module Datum : sig
@@ -159,4 +203,8 @@ module Datum : sig
     | Symbol of Symbol.t
     | Tensor of Tensor.t
     | Unit of Unit.t
+
+  val of_float : float -> t
+
+  val of_int : int -> t
 end
