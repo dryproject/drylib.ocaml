@@ -1,5 +1,7 @@
 (* This is free and unencumbered software released into the public domain. *)
 
+module Core = Dry.Core
+
 (* Code *)
 
 module Code = Dry.Code
@@ -7,6 +9,8 @@ module Code = Dry.Code
 (* Code.DRY *)
 
 module DRY = Dry.Code.DRY
+
+let () = assert ((DRY.Expression.Atom (Core.Datum.Symbol "foo")) = (DRY.Expression.Atom (Core.Datum.Symbol "foo")))
 
 (* Code.C *)
 

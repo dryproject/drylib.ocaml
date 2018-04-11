@@ -2,6 +2,11 @@
 
 (** DRY *)
 module DRY : sig
+  module Expression : sig
+    type t =
+      | Atom of Core.Datum.t
+      | List of t list
+  end
 end
 
 (** C *)

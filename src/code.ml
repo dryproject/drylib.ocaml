@@ -2,7 +2,11 @@
 
 (** DRY *)
 module DRY = struct
-  (* TODO *)
+  module Expression = struct
+    type t =
+      | Atom of Core.Datum.t
+      | List of t list
+  end
 end
 
 (** C *)
