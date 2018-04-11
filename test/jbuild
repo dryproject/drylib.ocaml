@@ -1,10 +1,10 @@
 (jbuild_version 1)
 
-(executable
- ((name test)
+(executables
+ ((names (test test_code test_core test_crypto test_data test_ffi test_geo test_io test_lang test_math test_media test_meta test_net test_qty test_std test_sys test_text test_time test_util))
   (libraries (dry))))
 
 (alias
  ((name runtest)
-  (deps (test.exe))
+  (deps (test.exe test_code.exe test_core.exe test_crypto.exe test_data.exe test_ffi.exe test_geo.exe test_io.exe test_lang.exe test_math.exe test_media.exe test_meta.exe test_net.exe test_qty.exe test_std.exe test_sys.exe test_text.exe test_time.exe test_util.exe))
   (action (run ${<}))))
