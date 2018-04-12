@@ -4,6 +4,8 @@ module Bool : sig
   type t = bool
 
   val of_bool : bool -> t
+
+  val to_string : t -> string
 end
 
 module Char : sig
@@ -12,10 +14,16 @@ module Char : sig
   val of_char : char -> t
 
   val of_int : int -> t
+
+  val to_char : t -> char
+
+  val to_string : t -> string
 end
 
 module Complex : sig
   type t
+
+  val to_string : t -> string
 end
 
 (*module Datum*)
@@ -24,12 +32,16 @@ module Float32 : sig
   type t = float
 
   val of_float : float -> t
+
+  val to_string : t -> string
 end
 
 module Float64 : sig
   type t = float
 
   val of_float : float -> t
+
+  val to_string : t -> string
 end
 
 module Float : sig
@@ -38,36 +50,48 @@ module Float : sig
     | Float64 of Float64.t
 
   val of_float : float -> t
+
+  val to_string : t -> string
 end
 
 module Int8 : sig
   type t = int
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Int16 : sig
   type t = int
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Int32 : sig
   type t = int32
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Int64 : sig
   type t = int64
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Int128 : sig
   type t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Int : sig
@@ -79,76 +103,106 @@ module Int : sig
     | Int128 of Int128.t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Integer : sig
   type t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Interval : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Matrix : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Natural : sig
   type t = Integer.t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 (*module Number*)
 
 module Quantity : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Rational : sig
   type t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Real : sig
   type t
 
   val of_float : float -> t
+
+  val to_string : t -> string
 end
 
 (*module Scalar*)
 
 module Symbol : sig
   type t = string
+
+  val to_string : t -> string
 end
 
 (*module Tensor*)
 
 module Unit : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Vector : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Word8 : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Word16 : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Word32 : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Word64 : sig
   type t
+
+  val to_string : t -> string
 end
 
 module Word : sig
@@ -157,6 +211,8 @@ module Word : sig
     | Word16 of Word16.t
     | Word32 of Word32.t
     | Word64 of Word64.t
+
+  val to_string : t -> string
 end
 
 module Number : sig
@@ -172,6 +228,8 @@ module Number : sig
   val of_float : float -> t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Scalar : sig
@@ -183,6 +241,8 @@ module Scalar : sig
   val of_float : float -> t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Tensor : sig
@@ -194,6 +254,8 @@ module Tensor : sig
   val of_float : float -> t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
 
 module Datum : sig
@@ -207,4 +269,6 @@ module Datum : sig
   val of_float : float -> t
 
   val of_int : int -> t
+
+  val to_string : t -> string
 end
