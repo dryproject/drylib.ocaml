@@ -8,5 +8,5 @@
 
 (alias
  ((name runtest)
-  (deps (test.exe test_code.exe test_core.exe test_crypto.exe test_data.exe test_ffi.exe test_geo.exe test_io.exe test_lang.exe test_math.exe test_media.exe test_meta.exe test_net.exe test_qty.exe test_std.exe test_sys.exe test_text.exe test_time.exe test_util.exe))
-  (action (run ${<}))))
+  (deps ((glob_files test*.exe)))
+  (action (run ./jbuild_run.sh ${^}))))
