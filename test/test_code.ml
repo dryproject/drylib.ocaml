@@ -1,6 +1,6 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-module Core = Dry.Core
+open Dry.Core
 
 (* Code *)
 
@@ -10,7 +10,7 @@ module Code = Dry.Code
 
 module DRY = Dry.Code.DRY
 
-let () = assert ((DRY.Expression.Atom (Core.Datum.Symbol "foo")) = (DRY.Expression.Atom (Core.Datum.Symbol "foo")))
+let () = assert ((DRY.Expression.Atom (Datum.Symbol "foo")) = (DRY.Expression.Atom (Datum.Symbol "foo")))
 
 (* Code.C *)
 
@@ -76,8 +76,24 @@ module Python = Dry.Code.Python
 
 module Ruby = Dry.Code.Ruby
 
+let () = assert (Ruby.to_string (Ruby.number (Number.of_int 42)) = "42")
+
+let () = assert (Ruby.to_string (Ruby.symbol "a") = ":a")
+
+let () = assert (Ruby.to_string (Ruby.string "a") = "\"a\"")
+
+let () = assert (Ruby.to_string (Ruby.var "a") = "a")
+
+let () = assert (Ruby.to_string Ruby.nil = "nil")
+
+let () = assert (Ruby.to_string Ruby.self = "self")
+
+let () = assert (Ruby.to_string (Ruby.of_int 42) = "42")
+
+let () = assert (Ruby.to_string (Ruby.of_float 1.23) = "1.23")
+
+let () = assert (Ruby.to_string (Ruby.of_string "a") = "\"a\"")
+
 (* Code.Rust *)
 
 module Rust = Dry.Code.Rust
-
-let () = assert (1 = 1)

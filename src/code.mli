@@ -81,6 +81,62 @@ end
 
 (** Ruby *)
 module Ruby : sig
+  module Literal : sig
+    type t =
+      | Number of Core.Number.t
+      | Symbol of string
+      | String of string
+
+    val to_string : t -> string
+  end
+
+  module Variable : sig
+    type t =
+      | Varname of string
+      | Nil
+      | Self
+
+    val to_string : t -> string
+  end
+
+  module Expression : sig
+    type t =
+      | Literal of Literal.t
+      | Variable of Variable.t
+      | Not of t
+      | And of t * t
+      | Or of t * t
+      | Return of t
+      | Yield of t
+
+    val to_string : t -> string
+  end
+
+  module Program : sig
+    type t = Expression.t list
+
+    val to_string : t -> string
+  end
+
+  val number : Core.Number.t -> Expression.t
+
+  val symbol : string -> Expression.t
+
+  val string : string -> Expression.t
+
+  val var : string -> Expression.t
+
+  val nil : Expression.t
+
+  val self : Expression.t
+
+  val of_int : int -> Expression.t
+
+  val of_float : float -> Expression.t
+
+  val of_string : string -> Expression.t
+
+  val to_string : Expression.t -> string
 end
 
 (** Rust *)
