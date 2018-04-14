@@ -6,6 +6,10 @@ module DRY : sig
     type t =
       | Atom of Core.Datum.t
       | List of t list
+
+    val of_int : int -> t
+
+    val of_float : float -> t
   end
 end
 

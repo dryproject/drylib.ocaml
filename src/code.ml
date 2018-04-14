@@ -2,10 +2,16 @@
 
 (** DRY *)
 module DRY = struct
+  module Datum = Core.Datum
+
   module Expression = struct
     type t =
-      | Atom of Core.Datum.t
+      | Atom of Datum.t
       | List of t list
+
+    let of_int z = Atom (Datum.of_int z)
+
+    let of_float r = Atom (Datum.of_float r)
   end
 end
 
