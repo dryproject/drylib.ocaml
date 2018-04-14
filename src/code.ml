@@ -16,6 +16,10 @@ module DRY = struct
     let of_int z = Atom (Datum.of_int z)
 
     let of_float r = Atom (Datum.of_float r)
+
+    let rec to_string = function
+      | Atom datum -> Datum.to_string datum
+      | List data -> "(" ^ (String.concat " " (List.map to_string data)) ^ ")"
   end
 end
 

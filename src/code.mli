@@ -14,6 +14,8 @@ module DRY : sig
     val of_int : int -> t
 
     val of_float : float -> t
+
+    val to_string : t -> string
   end
 end
 
