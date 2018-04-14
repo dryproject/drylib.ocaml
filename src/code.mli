@@ -2,6 +2,10 @@
 
 (** DRY *)
 module DRY : sig
+  module Location : sig
+    type t = { line: int; column: int }
+  end
+
   module Expression : sig
     type t =
       | Atom of Core.Datum.t

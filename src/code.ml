@@ -4,6 +4,10 @@
 module DRY = struct
   module Datum = Core.Datum
 
+  module Location = struct
+    type t = { line: int; column: int }
+  end
+
   module Expression = struct
     type t =
       | Atom of Datum.t
