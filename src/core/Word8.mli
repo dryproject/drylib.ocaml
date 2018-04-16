@@ -1,7 +1,5 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* IO *)
+type t
 
-module IO = DRY.IO
-
-let () = assert (1 = 1)
+val to_string : t -> string

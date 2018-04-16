@@ -1,0 +1,16 @@
+(* This is free and unencumbered software released into the public domain. *)
+
+type t =
+  | Complex of Complex.t
+  | Float of Float.t
+  | Int of Int.t
+  | Integer of Integer.t
+  | Natural of Natural.t
+  | Rational of Rational.t
+  | Real of Real.t
+
+val of_float : float -> t
+
+val of_int : int -> t
+
+val to_string : t -> string

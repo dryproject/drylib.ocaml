@@ -1,7 +1,3 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* IO *)
-
-module IO = DRY.IO
-
-let () = assert (1 = 1)
+let string = "0.0.0" (* TODO: preprocessed from the VERSION file *)

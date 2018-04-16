@@ -1,0 +1,7 @@
+;; This is free and unencumbered software released into the public domain.
+
+(jbuild_version 1)
+
+(library
+ ((name DRY__Geo)
+  (libraries (DRY__Core))))

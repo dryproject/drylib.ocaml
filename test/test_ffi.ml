@@ -2,6 +2,6 @@
 
 (* FFI *)
 
-module FFI = DRY.Ffi (* FIXME *)
+module FFI = DRY.FFI
 
 let () = assert (1 = 1)

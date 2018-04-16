@@ -4,4 +4,6 @@
 
 (library
  ((name DRY)
-  (synopsis "DRYlib for OCaml")))
+  (synopsis "DRYlib for OCaml")
+  (libraries (DRY__Code DRY__Core DRY__Crypto DRY__Data DRY__FFI DRY__Geo DRY__IO DRY__Lang DRY__Math DRY__Media DRY__Meta DRY__Net DRY__Qty DRY__Std DRY__Sys DRY__Text DRY__Time DRY__Util))
+  (wrapped false)))

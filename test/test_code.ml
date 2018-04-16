@@ -8,11 +8,9 @@ module Code = DRY.Code
 
 (* Code.DRY *)
 
-(* FIXME
-module DRY = DRY.Code.DRY
+module Dry = DRY.Code.DRY
 
-let () = assert ((DRY.Expression.Atom (Datum.Symbol "foo")) = (DRY.Expression.Atom (Datum.Symbol "foo")))
-*)
+let () = assert ((Dry.Expression.Atom (Datum.Symbol "foo")) = (Dry.Expression.Atom (Datum.Symbol "foo")))
 
 (* Code.C *)
 
@@ -60,9 +58,7 @@ module Lisp = DRY.Code.Lisp
 
 (* Code.Lua *)
 
-(*
 module Lua = DRY.Code.Lua
-*)
 
 (* Code.OCaml *)
 

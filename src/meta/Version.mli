@@ -1,7 +1,5 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* IO *)
+(** Version metadata *)
 
-module IO = DRY.IO
-
-let () = assert (1 = 1)
+val string : string

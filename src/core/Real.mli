@@ -1,7 +1,7 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* IO *)
+type t
 
-module IO = DRY.IO
+val of_float : float -> t
 
-let () = assert (1 = 1)
+val to_string : t -> string

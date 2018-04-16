@@ -1,7 +1,3 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* IO *)
-
-module IO = DRY.IO
-
-let () = assert (1 = 1)
+(* See: http://www.lispworks.com/documentation/lw70/CLHS/Body/02_.htm *)
