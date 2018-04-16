@@ -2,6 +2,6 @@
 
 (* Qty *)
 
-module Qty = Dry.Qty
+module Qty = DRY.Qty
 
 let () = assert (1 = 1)

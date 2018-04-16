@@ -2,10 +2,10 @@
 
 (* Crypto *)
 
-module Crypto = Dry.Crypto
+module Crypto = DRY.Crypto
 
 (* Crypto.Hash *)
 
-module Hash = Dry.Crypto.Hash
+module Hash = DRY.Crypto.Hash
 
 let () = assert (1 = 1)

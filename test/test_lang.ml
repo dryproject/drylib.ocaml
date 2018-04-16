@@ -2,10 +2,10 @@
 
 (* Lang *)
 
-module Lang = Dry.Lang
+module Lang = DRY.Lang
 
 (* Lang.EN *)
 
-module EN = Dry.Lang.EN
+module EN = DRY.Lang.EN
 
 let () = assert (1 = 1)

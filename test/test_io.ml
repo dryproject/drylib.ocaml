@@ -2,6 +2,6 @@
 
 (* IO *)
 
-module IO = Dry.Io (* FIXME *)
+module IO = DRY.Io (* FIXME *)
 
 let () = assert (1 = 1)

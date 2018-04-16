@@ -1,80 +1,84 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-open Dry.Core
+open DRY.Core
 
 (* Code *)
 
-module Code = Dry.Code
+module Code = DRY.Code
 
 (* Code.DRY *)
 
-module DRY = Dry.Code.DRY
+(* FIXME
+module DRY = DRY.Code.DRY
 
 let () = assert ((DRY.Expression.Atom (Datum.Symbol "foo")) = (DRY.Expression.Atom (Datum.Symbol "foo")))
+*)
 
 (* Code.C *)
 
-module C = Dry.Code.C
+module C = DRY.Code.C
 
 (* Code.Cpp *)
 
-module Cpp = Dry.Code.Cpp
+module Cpp = DRY.Code.Cpp
 
 (* Code.D *)
 
-module D = Dry.Code.D
+module D = DRY.Code.D
 
 (* Code.Dart *)
 
-module Dart = Dry.Code.Dart
+module Dart = DRY.Code.Dart
 
 (* Code.Elixir *)
 
-module Elixir = Dry.Code.Elixir
+module Elixir = DRY.Code.Elixir
 
 (* Code.Go *)
 
-module Go = Dry.Code.Go
+module Go = DRY.Code.Go
 
 (* Code.Java *)
 
-module Java = Dry.Code.Java
+module Java = DRY.Code.Java
 
 (* Code.Julia *)
 
-module Julia = Dry.Code.Julia
+module Julia = DRY.Code.Julia
 
 (* Code.JS *)
 
-module JS = Dry.Code.JS
+module JS = DRY.Code.JS
 
 (* Code.Kotlin *)
 
-module Kotlin = Dry.Code.Kotlin
+module Kotlin = DRY.Code.Kotlin
 
 (* Code.Lisp *)
 
-module Lisp = Dry.Code.Lisp
+module Lisp = DRY.Code.Lisp
 
 (* Code.Lua *)
 
-module Lua = Dry.Code.Lua
+(*
+module Lua = DRY.Code.Lua
+*)
 
 (* Code.OCaml *)
 
-module OCaml = Dry.Code.OCaml
+module OCaml = DRY.Code.OCaml
 
 (* Code.PHP *)
 
-module PHP = Dry.Code.PHP
+module PHP = DRY.Code.PHP
 
 (* Code.Python *)
 
-module Python = Dry.Code.Python
+module Python = DRY.Code.Python
 
 (* Code.Ruby *)
 
-module Ruby = Dry.Code.Ruby
+module Ruby = DRY.Code.Ruby
 
 let () = assert (Ruby.to_string (Ruby.number (Number.of_int 42)) = "42")
 
@@ -96,4 +100,4 @@ let () = assert (Ruby.to_string (Ruby.of_string "a") = "\"a\"")
 
 (* Code.Rust *)
 
-module Rust = Dry.Code.Rust
+module Rust = DRY.Code.Rust

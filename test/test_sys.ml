@@ -2,14 +2,14 @@
 
 (* Sys *)
 
-module Sys = Dry.Sys
+module Sys = DRY.Sys
 
 (* Sys.Linux *)
 
-module Linux = Dry.Sys.Linux
+module Linux = DRY.Sys.Linux
 
 (* Sys.POSIX *)
 
-module POSIX = Dry.Sys.POSIX
+module POSIX = DRY.Sys.POSIX
 
 let () = assert (1 = 1)

@@ -2,22 +2,22 @@
 
 (* Net *)
 
-module Net = Dry.Net
+module Net = DRY.Net
 
 (* Net.IPv4 *)
 
-module IPv4 = Dry.Net.IPv4
+module IPv4 = DRY.Net.IPv4
 
 (* Net.IPv6 *)
 
-module IPv6 = Dry.Net.IPv6
+module IPv6 = DRY.Net.IPv6
 
 (* Net.TCP *)
 
-module TCP = Dry.Net.TCP
+module TCP = DRY.Net.TCP
 
 (* Net.UDP *)
 
-module UDP = Dry.Net.UDP
+module UDP = DRY.Net.UDP
 
 let () = assert (1 = 1)

@@ -3,5 +3,5 @@
 (jbuild_version 1)
 
 (library
- ((name dry)
+ ((name DRY)
   (synopsis "DRYlib for OCaml")))

@@ -2,18 +2,18 @@
 
 (* Media *)
 
-module Media = Dry.Media
+module Media = DRY.Media
 
 (* Media.Audio *)
 
-module Audio = Dry.Media.Audio
+module Audio = DRY.Media.Audio
 
 (* Media.Image *)
 
-module Image = Dry.Media.Image
+module Image = DRY.Media.Image
 
 (* Media.Video *)
 
-module Video = Dry.Media.Video
+module Video = DRY.Media.Video
 
 let () = assert (1 = 1)

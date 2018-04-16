@@ -4,7 +4,7 @@
 
 (executables
  ((names (test test_code test_core test_crypto test_data test_ffi test_geo test_io test_lang test_math test_media test_meta test_net test_qty test_std test_sys test_text test_time test_util))
-  (libraries (dry))))
+  (libraries (DRY))))
 
 (alias
  ((name runtest)

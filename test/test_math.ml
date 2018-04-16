@@ -2,6 +2,6 @@
 
 (* Math *)
 
-module Math = Dry.Math
+module Math = DRY.Math
 
 let () = assert (1 = 1)

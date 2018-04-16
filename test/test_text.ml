@@ -2,14 +2,14 @@
 
 (* Text *)
 
-module Text = Dry.Text
+module Text = DRY.Text
 
 (* Text.ASCII *)
 
-module ASCII = Dry.Text.ASCII
+module ASCII = DRY.Text.ASCII
 
 (* Text.UTF8 *)
 
-module UTF8 = Dry.Text.UTF8
+module UTF8 = DRY.Text.UTF8
 
 let () = assert (1 = 1)

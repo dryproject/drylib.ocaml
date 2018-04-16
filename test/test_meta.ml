@@ -2,10 +2,10 @@
 
 (* Meta *)
 
-module Meta = Dry.Meta
+module Meta = DRY.Meta
 
 (* Meta.Version *)
 
-module Version = Dry.Meta.Version
+module Version = DRY.Meta.Version
 
 let () = assert (1 = 1)
