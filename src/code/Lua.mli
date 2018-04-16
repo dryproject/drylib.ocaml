@@ -2,6 +2,8 @@
 
 (** Lua *)
 
+module Name = DRY__Core.Symbol
+
 module Boolean = DRY__Core.Bool
 
 module Float = DRY__Core.Float
@@ -83,9 +85,53 @@ end
 
 module Expression : sig
   type t =
-    | Value of Value.t
+    | Literal of Value.t
+    | Variable of Name.t
     | UnaryOperator of UnaryOperator.t * t
     | BinaryOperator of BinaryOperator.t * t * t
+    | FunctionCall of Name.t * t list
+    | FunctionDef of Name.t list * t list
+    | TableConstructor
 
   val to_string : t -> string
 end
+
+module Statement : sig
+  type t =
+    | Empty
+    | Break
+    | Return of Expression.t option
+    | Do of t list
+    | While of Expression.t * t list
+    | Repeat of Expression.t * t list
+    | If of Expression.t * t list * t list
+    | FunctionCall of Name.t * t list
+    | FunctionDef of Name.t * Name.t list * t list
+
+  val to_string : t -> string
+end
+
+(** A block is a list of statements. *)
+module Block : sig
+  type t = Statement.t list
+
+  val to_string : t -> string
+end
+
+val nil : Expression.t
+val empty_table : Expression.t
+val empty_string : Expression.t
+
+val boolean : Boolean.t -> Expression.t
+val number : Number.t -> Expression.t
+val float : Float.t -> Expression.t
+val integer : Integer.t -> Expression.t
+val string : String.t -> Expression.t
+val var : string -> Expression.t
+
+val of_bool : bool -> Expression.t
+val of_float : float -> Expression.t
+val of_int : int -> Expression.t
+val of_string : string -> Expression.t
+
+val to_string : Expression.t -> string

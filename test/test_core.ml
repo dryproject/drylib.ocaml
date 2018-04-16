@@ -150,7 +150,7 @@ let () = assert (Scalar.to_string(Scalar.of_int 42) = "42")
 
 module Symbol = DRY.Core.Symbol
 
-let () = assert (Symbol.to_string("foobar") = "foobar")
+let () = assert (Symbol.to_string(Symbol.of_string "foobar") = "foobar")
 
 (* Core.Tensor *)
 
