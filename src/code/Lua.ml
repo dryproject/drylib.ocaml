@@ -6,6 +6,9 @@
 
 open DRY__Core
 
+module Stdlib = DRY__Stdlib
+module Printf = DRY__Stdlib.Printf
+
 module Boolean = DRY__Core.Bool
 
 module Float   = DRY__Core.Float
@@ -96,4 +99,58 @@ module Type = struct
     | Userdata -> "userdata"
     | Thread -> "thread"
     | Table -> "table"
+end
+
+module UnaryOperator = struct
+  type t = Neg | BNot | Len | Not
+
+  let to_string = function
+    | Neg -> "-"
+    | BNot -> "~"
+    | Len -> "#"
+    | Not -> "not"
+end
+
+module BinaryOperator = struct
+  type t =
+    | Add | Sub | Mul | Mod | Pow | Div | IDiv
+    | BAnd | BOr | BXor | Shl | Shr | Concat
+    | Eq | Lt | Le | Ne | Gt | Ge | And | Or
+
+  let to_string = function
+    | Add -> "+"
+    | Sub -> "-"
+    | Mul -> "*"
+    | Mod -> "%"
+    | Pow -> "^"
+    | Div -> "/"
+    | IDiv -> "//"
+    | BAnd -> "&"
+    | BOr -> "|"
+    | BXor -> "~"
+    | Shl -> "<<"
+    | Shr -> ">>"
+    | Concat -> ".."
+    | Eq -> "=="
+    | Lt -> "<"
+    | Le -> "<="
+    | Ne -> "~="
+    | Gt -> ">"
+    | Ge -> ">="
+    | And -> "and"
+    | Or -> "or"
+end
+
+module Expression = struct
+  type t =
+    | Value of Value.t
+    | UnaryOperator of UnaryOperator.t * t
+    | BinaryOperator of BinaryOperator.t * t * t
+
+  let rec to_string = function
+    | Value x -> Value.to_string x
+    | UnaryOperator (op, a) ->
+      Printf.sprintf "(%s %s)" (UnaryOperator.to_string op) (to_string a)
+    | BinaryOperator (op, a, b) ->
+      Printf.sprintf "(%s %s %s)" (to_string a) (BinaryOperator.to_string op) (to_string b)
 end

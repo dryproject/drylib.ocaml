@@ -6,7 +6,7 @@
 open DRY__Core
 
 module Stdlib = DRY__Stdlib
-module Printf = Stdlib.Printf
+module Printf = DRY__Stdlib.Printf
 
 module Literal = struct
   type t =

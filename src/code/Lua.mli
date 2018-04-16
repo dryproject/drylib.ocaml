@@ -65,3 +65,27 @@ module Type : sig
 
   val to_string : t -> string
 end
+
+module UnaryOperator : sig
+  type t = Neg | BNot | Len | Not
+
+  val to_string : t -> string
+end
+
+module BinaryOperator : sig
+  type t =
+    | Add | Sub | Mul | Mod | Pow | Div | IDiv
+    | BAnd | BOr | BXor | Shl | Shr | Concat
+    | Eq | Lt | Le | Ne | Gt | Ge | And | Or
+
+  val to_string : t -> string
+end
+
+module Expression : sig
+  type t =
+    | Value of Value.t
+    | UnaryOperator of UnaryOperator.t * t
+    | BinaryOperator of BinaryOperator.t * t * t
+
+  val to_string : t -> string
+end
