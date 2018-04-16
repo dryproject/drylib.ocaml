@@ -5,6 +5,9 @@
 
 open DRY__Core
 
+module Stdlib = DRY__Stdlib
+module Printf = Stdlib.Printf
+
 module Literal = struct
   type t =
     | Number of Number.t
@@ -53,7 +56,7 @@ module Program = struct
   type t = Expression.t list
 
   let to_string prog =
-    String.concat "\n" (List.map Expression.to_string prog)
+    Stdlib.String.concat "\n" (Stdlib.List.map Expression.to_string prog)
 end
 
 let number n = Expression.Literal (Literal.Number n)

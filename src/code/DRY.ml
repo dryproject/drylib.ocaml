@@ -2,6 +2,8 @@
 
 open DRY__Core
 
+module Stdlib = DRY__Stdlib
+
 module Location = struct
   type t = { line: int; column: int }
 end
@@ -17,5 +19,5 @@ module Expression = struct
 
   let rec to_string = function
     | Atom datum -> Datum.to_string datum
-    | List data -> "(" ^ (String.concat " " (List.map to_string data)) ^ ")"
+    | List data -> "(" ^ (Stdlib.String.concat " " (Stdlib.List.map to_string data)) ^ ")"
 end

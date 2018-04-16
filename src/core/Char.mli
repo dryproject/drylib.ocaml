@@ -1,6 +1,6 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-type t = Uchar.t
+type t = DRY__Stdlib.Uchar.t
 
 val of_char : char -> t
 
