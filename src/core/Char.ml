@@ -11,4 +11,4 @@ let of_int = Uchar.of_int
 
 let to_char = Uchar.to_char
 
-let to_string c = "?" (* TODO *)
+let to_string c = String.make 1 (to_char c) (* FIXME *)

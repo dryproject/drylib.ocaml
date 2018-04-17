@@ -18,6 +18,8 @@ module Literal = struct
     | Number n -> Number.to_string n
     | Symbol s -> ":" ^ s
     | String s -> "\"" ^ s ^ "\"" (* TODO: escaping *)
+
+  let to_code = to_string
 end
 
 module Variable = struct
@@ -30,6 +32,8 @@ module Variable = struct
     | Varname s -> s
     | Nil -> "nil"
     | Self -> "self"
+
+  let to_code = to_string
 end
 
 module Expression = struct
@@ -50,6 +54,8 @@ module Expression = struct
     | Or (x, y) -> Printf.sprintf "(%s or %s)" (to_string x) (to_string y)
     | Return x -> Printf.sprintf "return (%s)" (to_string x)
     | Yield x -> Printf.sprintf "yield (%s)" (to_string x)
+
+  let to_code = to_string
 end
 
 module Program = struct
@@ -57,6 +63,8 @@ module Program = struct
 
   let to_string prog =
     Stdlib.String.concat "\n" (Stdlib.List.map Expression.to_string prog)
+
+  let to_code = to_string
 end
 
 let number n = Expression.Literal (Literal.Number n)
@@ -78,3 +86,5 @@ let of_float r = number (Number.of_float r)
 let of_string = string
 
 let to_string = Expression.to_string
+
+let to_code = Expression.to_code

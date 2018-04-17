@@ -9,6 +9,8 @@ module Literal : sig
     | String of string
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module Variable : sig
@@ -18,6 +20,8 @@ module Variable : sig
     | Self
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module Expression : sig
@@ -31,12 +35,16 @@ module Expression : sig
     | Yield of t
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module Program : sig
   type t = Expression.t list
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 val number : DRY__Core.Number.t -> Expression.t
@@ -58,3 +66,5 @@ val of_float : float -> Expression.t
 val of_string : string -> Expression.t
 
 val to_string : Expression.t -> string
+
+val to_code : Expression.t -> string

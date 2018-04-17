@@ -17,6 +17,8 @@ module Number : sig
   val of_int : int -> t
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module Function : sig
@@ -47,6 +49,8 @@ module Value : sig
   val of_int : int -> t
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module Type : sig
@@ -63,12 +67,16 @@ module Type : sig
   val of_value : Value.t -> t
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module UnaryOperator : sig
   type t = Neg | BNot | Len | Not
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module BinaryOperator : sig
@@ -78,6 +86,8 @@ module BinaryOperator : sig
     | Eq | Lt | Le | Ne | Gt | Ge | And | Or
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module Expression : sig
@@ -91,6 +101,8 @@ module Expression : sig
     | TableConstructor
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module Statement : sig
@@ -106,6 +118,8 @@ module Statement : sig
     | FunctionDef of Name.t * Name.t list * t list
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 (** A block is a list of statements. *)
@@ -113,6 +127,8 @@ module Block : sig
   type t = Statement.t list
 
   val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 val nil : Expression.t
@@ -132,3 +148,4 @@ val of_int : int -> Expression.t
 val of_string : string -> Expression.t
 
 val to_string : Expression.t -> string
+val to_code : Expression.t -> string

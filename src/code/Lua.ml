@@ -29,6 +29,8 @@ module Number = struct
   let to_string = function
     | Integer z -> Integer.to_string z
     | Float r -> Float.to_string r
+
+  let to_code = to_string
 end
 
 module Function = struct
@@ -69,6 +71,8 @@ module Value = struct
     | Userdata -> "<userdata>"
     | Thread -> "<thread>"
     | Table -> "{}" (* TODO *)
+
+  let to_code = to_string
 end
 
 module Type = struct
@@ -101,6 +105,8 @@ module Type = struct
     | Userdata -> "userdata"
     | Thread -> "thread"
     | Table -> "table"
+
+  let to_code = to_string
 end
 
 module UnaryOperator = struct
@@ -111,6 +117,8 @@ module UnaryOperator = struct
     | BNot -> "~"
     | Len -> "#"
     | Not -> "not"
+
+  let to_code = to_string
 end
 
 module BinaryOperator = struct
@@ -141,6 +149,8 @@ module BinaryOperator = struct
     | Ge -> ">="
     | And -> "and"
     | Or -> "or"
+
+  let to_code = to_string
 end
 
 module Expression = struct
@@ -168,6 +178,8 @@ module Expression = struct
         (Stdlib.String.concat ", " (Stdlib.List.map Name.to_string params))
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
     | TableConstructor -> "{}" (* TODO*)
+
+  let to_code = to_string
 end
 
 module Statement = struct
@@ -204,6 +216,8 @@ module Statement = struct
       Printf.sprintf "function %s(%s) %s end" (Name.to_string name)
         (Stdlib.String.concat ", " (Stdlib.List.map Name.to_string params))
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
+
+  let to_code = to_string
 end
 
 module Block = struct
@@ -211,6 +225,8 @@ module Block = struct
 
   let to_string block =
     Stdlib.String.concat "; " (Stdlib.List.map Statement.to_string block)
+
+  let to_code = to_string
 end
 
 let nil = Expression.Literal Value.Nil
@@ -240,3 +256,5 @@ let of_int z = number (Number.of_int z)
 let of_string = string
 
 let to_string = Expression.to_string
+
+let to_code = Expression.to_code
