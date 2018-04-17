@@ -6,4 +6,6 @@ type t = int64
 
 let of_int = Stdlib.Int64.of_int
 
+let as_int64 z = z
+
 let to_string = Stdlib.Int64.to_string
