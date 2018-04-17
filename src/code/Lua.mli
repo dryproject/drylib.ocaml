@@ -2,15 +2,12 @@
 
 (** Lua *)
 
-module Name = DRY__Core.Symbol
+module Name    = DRY__Core.Symbol
 
 module Boolean = DRY__Core.Bool
-
-module Float = DRY__Core.Float
-
+module Float   = DRY__Core.Float
 module Integer = DRY__Core.Int
-
-module String = DRY__Stdlib.String
+module String  = DRY__Stdlib.String
 
 module Number : sig
   type t = Integer of Integer.t | Float of Float.t
