@@ -52,6 +52,13 @@ module Primitive = struct
     | Long z -> Long.to_string z
     | Float r -> Float.to_string r
     | Double r -> Double.to_string r
+
+  let to_code = function
+    | Char c -> Printf.sprintf "'%s'" (Char.to_string c) (* FIXME *)
+    | Long z -> Printf.sprintf "%sL" (Long.to_string z)
+    | Float r -> Printf.sprintf "%sf" (Float.to_string r)
+    | Double r -> Printf.sprintf "%sd" (Double.to_string r)
+    | _ as x -> to_string x
 end
 
 module PrimitiveType = struct
@@ -74,30 +81,60 @@ module PrimitiveType = struct
     | Long -> "long"
     | Float -> "float"
     | Double -> "double"
+
+  let to_code = to_string
 end
 
-let boolean b = Primitive.Boolean b
+module Literal = struct
+  type t =
+    | Null
+    | Primitive of Primitive.t
+    | Class of Identifier.t
 
-let char c = Primitive.Char c
+  let of_bool b = Primitive (Primitive.of_bool b)
 
-let byte z = Primitive.Byte z
+  let of_char c = Primitive (Primitive.of_char c)
 
-let short z = Primitive.Short z
+  let of_float r = Primitive (Primitive.of_float r)
 
-let int z = Primitive.Int z
+  let of_int z = Primitive (Primitive.of_int z)
 
-let long z = Primitive.Long z
+  let to_string = function
+    | Null -> "null"
+    | Primitive x -> Primitive.to_string x
+    | Class id -> Printf.sprintf "%s.class" (Identifier.to_string id)
 
-let float r = Primitive.Float r
+  let to_code = function
+    | Primitive x -> Primitive.to_code x
+    | _ as x -> to_string x
+end
 
-let double r = Primitive.Double r
+let null = Literal.Null
 
-let of_bool = Primitive.of_bool
+let boolean b = Literal.Primitive (Primitive.Boolean b)
 
-let of_char = Primitive.of_char
+let char c = Literal.Primitive (Primitive.Char c)
 
-let of_float = Primitive.of_float
+let byte z = Literal.Primitive (Primitive.Byte z)
 
-let of_int = Primitive.of_int
+let short z = Literal.Primitive (Primitive.Short z)
 
-let to_string = Primitive.to_string
+let int z = Literal.Primitive (Primitive.Int z)
+
+let long z = Literal.Primitive (Primitive.Long z)
+
+let float r = Literal.Primitive (Primitive.Float r)
+
+let double r = Literal.Primitive (Primitive.Double r)
+
+let of_bool = Literal.of_bool
+
+let of_char = Literal.of_char
+
+let of_float = Literal.of_float
+
+let of_int = Literal.of_int
+
+let to_string = Literal.to_string
+
+let to_code = Literal.to_code

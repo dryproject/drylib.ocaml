@@ -25,6 +25,10 @@ module Primitive : sig
     | Long of Long.t
     | Float of Float.t
     | Double of Double.t
+
+  val to_string : t -> string
+
+  val to_code : t -> string
 end
 
 module PrimitiveType : sig
@@ -37,30 +41,49 @@ module PrimitiveType : sig
     | Long
     | Float
     | Double
+
+  val to_string : t -> string
+
+  val to_code : t -> string
 end
 
-val boolean : Boolean.t -> Primitive.t
+module Literal : sig
+  type t =
+    | Null
+    | Primitive of Primitive.t
+    | Class of Identifier.t
 
-val char : Char.t -> Primitive.t
+  val to_string : t -> string
 
-val byte : Byte.t -> Primitive.t
+  val to_code : t -> string
+end
 
-val short : Short.t -> Primitive.t
+val null : Literal.t
 
-val int : Int.t -> Primitive.t
+val boolean : Boolean.t -> Literal.t
 
-val long : Long.t -> Primitive.t
+val char : Char.t -> Literal.t
 
-val float : Float.t -> Primitive.t
+val byte : Byte.t -> Literal.t
 
-val double : Double.t -> Primitive.t
+val short : Short.t -> Literal.t
 
-val of_bool : bool -> Primitive.t
+val int : Int.t -> Literal.t
 
-val of_char : char -> Primitive.t
+val long : Long.t -> Literal.t
 
-val of_float : float -> Primitive.t
+val float : Float.t -> Literal.t
 
-val of_int : int -> Primitive.t
+val double : Double.t -> Literal.t
 
-val to_string : Primitive.t -> string
+val of_bool : bool -> Literal.t
+
+val of_char : char -> Literal.t
+
+val of_float : float -> Literal.t
+
+val of_int : int -> Literal.t
+
+val to_string : Literal.t -> string
+
+val to_code : Literal.t -> string
