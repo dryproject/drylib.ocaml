@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_time))
+ ((names (test_duration test_instant))
   (libraries (DRY__Time))))
 
 (alias

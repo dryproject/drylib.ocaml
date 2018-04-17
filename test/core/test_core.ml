@@ -1,7 +1,5 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* Core *)
-
 module Core = DRY__Core
 
 (* Core.Bool *)
@@ -187,5 +185,3 @@ module Word32 = DRY__Core.Word32
 (* Core.Word64 *)
 
 module Word64 = DRY__Core.Word64
-
-let () = assert (1 = 1)

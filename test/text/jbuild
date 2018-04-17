@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_text))
+ ((names (test_ascii test_utf8))
   (libraries (DRY__Text))))
 
 (alias

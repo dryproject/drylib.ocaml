@@ -1,6 +1,6 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* Std *)
+open DRY__Core
 
 module Std = DRY__Std
 
@@ -67,5 +67,3 @@ module Std = DRY__Std
 (* Std.XSF *)
 
 (*module XSF = DRY__Std.XSF*)
-
-let () = assert (1 = 1)

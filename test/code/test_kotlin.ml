@@ -2,4 +2,4 @@
 
 open DRY__Core
 
-module IO = DRY__IO
+module Kotlin = DRY__Code.Kotlin

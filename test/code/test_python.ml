@@ -2,4 +2,4 @@
 
 open DRY__Core
 
-module IO = DRY__IO
+module Python = DRY__Code.Python

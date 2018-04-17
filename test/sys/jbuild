@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_sys))
+ ((names (test_linux test_posix))
   (libraries (DRY__Sys))))
 
 (alias

@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_meta))
+ ((names (test_version))
   (libraries (DRY__Meta))))
 
 (alias

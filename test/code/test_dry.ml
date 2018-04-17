@@ -1,7 +1,5 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* Time *)
+open DRY__Core
 
-module Time = DRY__Time
-
-let () = assert (1 = 1)
+module Dry = DRY__Code.DRY

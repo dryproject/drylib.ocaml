@@ -1,7 +1,5 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-(* Math *)
+open DRY__Core
 
 module Math = DRY__Math
-
-let () = assert (1 = 1)

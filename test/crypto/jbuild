@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_crypto))
+ ((names (test_hash))
   (libraries (DRY__Crypto))))
 
 (alias

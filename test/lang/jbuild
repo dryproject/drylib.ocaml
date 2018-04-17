@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_lang))
+ ((names (test_en))
   (libraries (DRY__Lang))))
 
 (alias

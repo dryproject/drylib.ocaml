@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_media))
+ ((names (test_audio test_image test_video))
   (libraries (DRY__Media))))
 
 (alias
