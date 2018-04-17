@@ -3,10 +3,10 @@
 (jbuild_version 1)
 
 (executables
- ((names (test))
+ ((names (test_meta))
   (libraries (DRY))))
 
 (alias
  ((name runtest)
   (deps ((glob_files test*.exe)))
-  (action (run ./jbuild_run.sh ${^}))))
+  (action (run ../jbuild_run.sh ${^}))))
