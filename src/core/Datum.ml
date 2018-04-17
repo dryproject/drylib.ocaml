@@ -7,9 +7,13 @@ type t =
   | Tensor of Tensor.t
   | Unit of Unit.t
 
-let of_float f = Tensor (Tensor.of_float f)
+let of_bool b = Tensor (Tensor.of_bool b)
 
-let of_int n = Tensor (Tensor.of_int n)
+let of_char c = Tensor (Tensor.of_char c)
+
+let of_float r = Tensor (Tensor.of_float r)
+
+let of_int z = Tensor (Tensor.of_int z)
 
 let to_string = function
   | Interval x -> Interval.to_string x

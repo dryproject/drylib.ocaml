@@ -7,6 +7,10 @@ type t =
   | Tensor of Tensor.t
   | Unit of Unit.t
 
+val of_bool : bool -> t
+
+val of_char : char -> t
+
 val of_float : float -> t
 
 val of_int : int -> t

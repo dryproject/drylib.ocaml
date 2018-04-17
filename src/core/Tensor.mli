@@ -5,6 +5,10 @@ type t =
   | Vector of Vector.t
   | Matrix of Matrix.t
 
+val of_bool : bool -> t
+
+val of_char : char -> t
+
 val of_float : float -> t
 
 val of_int : int -> t

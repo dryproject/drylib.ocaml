@@ -5,9 +5,13 @@ type t =
   | Vector of Vector.t
   | Matrix of Matrix.t
 
-let of_float f = Scalar (Scalar.of_float f)
+let of_bool b = Scalar (Scalar.of_bool b)
 
-let of_int n = Scalar (Scalar.of_int n)
+let of_char c = Scalar (Scalar.of_char c)
+
+let of_float r = Scalar (Scalar.of_float r)
+
+let of_int z = Scalar (Scalar.of_int z)
 
 let to_string = function
   | Scalar x -> Scalar.to_string x
