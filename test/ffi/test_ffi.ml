@@ -2,6 +2,6 @@
 
 (* FFI *)
 
-module FFI = DRY.FFI
+module FFI = DRY__FFI
 
 let () = assert (1 = 1)

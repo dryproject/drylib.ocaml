@@ -2,6 +2,6 @@
 
 (* Time *)
 
-module Time = DRY.Time
+module Time = DRY__Time
 
 let () = assert (1 = 1)

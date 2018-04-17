@@ -2,6 +2,6 @@
 
 (* Util *)
 
-module Util = DRY.Util
+module Util = DRY__Util
 
 let () = assert (1 = 1)

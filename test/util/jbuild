@@ -4,7 +4,7 @@
 
 (executables
  ((names (test_util))
-  (libraries (DRY))))
+  (libraries (DRY__Util))))
 
 (alias
  ((name runtest)

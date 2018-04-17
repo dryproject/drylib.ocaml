@@ -4,7 +4,7 @@
 
 (executables
  ((names (test_time))
-  (libraries (DRY))))
+  (libraries (DRY__Time))))
 
 (alias
  ((name runtest)

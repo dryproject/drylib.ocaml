@@ -2,6 +2,6 @@
 
 (* Data *)
 
-module Data = DRY.Data
+module Data = DRY__Data
 
 let () = assert (1 = 1)

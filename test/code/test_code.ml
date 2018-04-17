@@ -1,14 +1,14 @@
 (* This is free and unencumbered software released into the public domain. *)
 
-open DRY.Core
+open DRY__Core
 
 (* Code *)
 
-module Code = DRY.Code
+module Code = DRY__Code
 
 (* Code.DRY *)
 
-module Dry = DRY.Code.DRY
+module Dry = DRY__Code.DRY
 
 (*
 let () = assert ((Dry.Expression.Atom (Datum.Symbol "foo")) = (Dry.Expression.Atom (Datum.Symbol "foo")))
@@ -16,51 +16,51 @@ let () = assert ((Dry.Expression.Atom (Datum.Symbol "foo")) = (Dry.Expression.At
 
 (* Code.C *)
 
-module C = DRY.Code.C
+module C = DRY__Code.C
 
 (* Code.Cpp *)
 
-module Cpp = DRY.Code.Cpp
+module Cpp = DRY__Code.Cpp
 
 (* Code.D *)
 
-module D = DRY.Code.D
+module D = DRY__Code.D
 
 (* Code.Dart *)
 
-module Dart = DRY.Code.Dart
+module Dart = DRY__Code.Dart
 
 (* Code.Elixir *)
 
-module Elixir = DRY.Code.Elixir
+module Elixir = DRY__Code.Elixir
 
 (* Code.Go *)
 
-module Go = DRY.Code.Go
+module Go = DRY__Code.Go
 
 (* Code.Java *)
 
-module Java = DRY.Code.Java
+module Java = DRY__Code.Java
 
 (* Code.Julia *)
 
-module Julia = DRY.Code.Julia
+module Julia = DRY__Code.Julia
 
 (* Code.JS *)
 
-module JS = DRY.Code.JS
+module JS = DRY__Code.JS
 
 (* Code.Kotlin *)
 
-module Kotlin = DRY.Code.Kotlin
+module Kotlin = DRY__Code.Kotlin
 
 (* Code.Lisp *)
 
-module Lisp = DRY.Code.Lisp
+module Lisp = DRY__Code.Lisp
 
 (* Code.Lua *)
 
-module Lua = DRY.Code.Lua
+module Lua = DRY__Code.Lua
 
 let () = assert (Lua.to_string Lua.nil = "nil")
 
@@ -82,19 +82,19 @@ let () = assert (Lua.to_string (Lua.of_string "a") = "\"a\"")
 
 (* Code.OCaml *)
 
-module OCaml = DRY.Code.OCaml
+module OCaml = DRY__Code.OCaml
 
 (* Code.PHP *)
 
-module PHP = DRY.Code.PHP
+module PHP = DRY__Code.PHP
 
 (* Code.Python *)
 
-module Python = DRY.Code.Python
+module Python = DRY__Code.Python
 
 (* Code.Ruby *)
 
-module Ruby = DRY.Code.Ruby
+module Ruby = DRY__Code.Ruby
 
 let () = assert (Ruby.to_string (Ruby.number (Number.of_int 42)) = "42")
 
@@ -116,4 +116,4 @@ let () = assert (Ruby.to_string (Ruby.of_string "a") = "\"a\"")
 
 (* Code.Rust *)
 
-module Rust = DRY.Code.Rust
+module Rust = DRY__Code.Rust

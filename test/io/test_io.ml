@@ -2,6 +2,6 @@
 
 (* IO *)
 
-module IO = DRY.IO
+module IO = DRY__IO
 
 let () = assert (1 = 1)

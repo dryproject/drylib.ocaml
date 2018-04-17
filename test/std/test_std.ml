@@ -2,70 +2,70 @@
 
 (* Std *)
 
-module Std = DRY.Std
+module Std = DRY__Std
 
 (* Std.ANSI *)
 
-(*module ANSI = DRY.Std.ANSI*)
+(*module ANSI = DRY__Std.ANSI*)
 
 (* Std.DCMI *)
 
-(*module DCMI = DRY.Std.DCMI*)
+(*module DCMI = DRY__Std.DCMI*)
 
 (* Std.ECMA *)
 
-(*module ECMA = DRY.Std.ECMA*)
+(*module ECMA = DRY__Std.ECMA*)
 
 (* Std.IANA *)
 
-(*module IANA = DRY.Std.IANA*)
+(*module IANA = DRY__Std.IANA*)
 
 (* Std.IEEE *)
 
-(*module IEEE = DRY.Std.IEEE*)
+(*module IEEE = DRY__Std.IEEE*)
 
 (* Std.IETF *)
 
-(*module IETF = DRY.Std.IETF*)
+(*module IETF = DRY__Std.IETF*)
 
 (* Std.ISO *)
 
-(*module ISO = DRY.Std.ISO*)
+(*module ISO = DRY__Std.ISO*)
 
 (* Std.ITU *)
 
-(*module ITU = DRY.Std.ITU*)
+(*module ITU = DRY__Std.ITU*)
 
 (* Std.NIST *)
 
-(*module NIST = DRY.Std.NIST*)
+(*module NIST = DRY__Std.NIST*)
 
 (* Std.OASIS *)
 
-(*module OASIS = DRY.Std.OASIS*)
+(*module OASIS = DRY__Std.OASIS*)
 
 (* Std.OMG *)
 
-(*module OMG = DRY.Std.OMG*)
+(*module OMG = DRY__Std.OMG*)
 
 (* Std.OpenGroup *)
 
-(*module OpenGroup = DRY.Std.OpenGroup*)
+(*module OpenGroup = DRY__Std.OpenGroup*)
 
 (* Std.OSRF *)
 
-(*module OSRF = DRY.Std.OSRF*)
+(*module OSRF = DRY__Std.OSRF*)
 
 (* Std.SI *)
 
-(*module SI = DRY.Std.SI*)
+(*module SI = DRY__Std.SI*)
 
 (* Std.W3C *)
 
-(*module W3C = DRY.Std.W3C*)
+(*module W3C = DRY__Std.W3C*)
 
 (* Std.XSF *)
 
-(*module XSF = DRY.Std.XSF*)
+(*module XSF = DRY__Std.XSF*)
 
 let () = assert (1 = 1)

@@ -4,7 +4,7 @@
 
 (executables
  ((names (test_geo))
-  (libraries (DRY))))
+  (libraries (DRY__Geo))))
 
 (alias
  ((name runtest)
