@@ -47,3 +47,16 @@ let () = assert (Java.to_code @@ Java.long 42L = "42L")
 let () = assert (Java.to_code @@ Java.float 1.23 = "1.23f")
 
 let () = assert (Java.to_code @@ Java.double 1.23 = "1.23d")
+
+(* Java.TypeDeclaration *)
+
+(* Java.CompilationUnit *)
+
+let () =
+  let package   = "test" in
+  let imports   = ["dry.*"] in
+  let class_def = Java.TypeDeclaration.Class "hello" in
+  let input     = Java.CompilationUnit.create None (Some package) imports class_def in
+  let actual    = Java.CompilationUnit.to_code input in
+  let expected  = "package test;\n\nimport dry.*;\n\nclass hello {\n}\n" in
+  assert (actual = expected)

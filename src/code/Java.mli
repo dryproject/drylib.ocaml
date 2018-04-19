@@ -58,6 +58,30 @@ module Literal : sig
   val to_code : t -> string
 end
 
+module TypeDeclaration : sig
+  type t =
+    | Class of string
+    | Interface of string
+
+  val to_string : t -> string
+
+  val to_code : t -> string
+end
+
+module CompilationUnit : sig
+  type t =
+    { comment: string option;
+      package: string option;
+      imports: string list;
+      defines: TypeDeclaration.t }
+
+  val create : string option -> string option -> string list -> TypeDeclaration.t -> t
+
+  val to_string : t -> string
+
+  val to_code : t -> string
+end
+
 val null : Literal.t
 
 val boolean : Boolean.t -> Literal.t

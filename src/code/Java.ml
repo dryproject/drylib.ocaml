@@ -6,7 +6,8 @@
 open DRY__Core
 
 module Stdlib     = DRY__Stdlib
-module Printf     = DRY__Stdlib.Printf
+module Buffer     = Stdlib.Buffer
+module List       = Stdlib.List
 
 (* Syntactic constructs *)
 module Identifier = DRY__Core.Symbol
@@ -23,6 +24,8 @@ module Double     = DRY__Core.Float64
 
 (* Object types *)
 module String     = DRY__Stdlib.String
+
+let sprintf = Stdlib.Printf.sprintf
 
 module Primitive = struct
   type t =
@@ -54,10 +57,10 @@ module Primitive = struct
     | Double r -> Double.to_string r
 
   let to_code = function
-    | Char c -> Printf.sprintf "'%s'" (Char.to_string c) (* FIXME *)
-    | Long z -> Printf.sprintf "%sL" (Long.to_string z)
-    | Float r -> Printf.sprintf "%sf" (Float.to_string r)
-    | Double r -> Printf.sprintf "%sd" (Double.to_string r)
+    | Char c -> sprintf "'%s'" (Char.to_string c) (* FIXME *)
+    | Long z -> sprintf "%sL" (Long.to_string z)
+    | Float r -> sprintf "%sf" (Float.to_string r)
+    | Double r -> sprintf "%sd" (Double.to_string r)
     | _ as x -> to_string x
 end
 
@@ -102,11 +105,61 @@ module Literal = struct
   let to_string = function
     | Null -> "null"
     | Primitive x -> Primitive.to_string x
-    | Class id -> Printf.sprintf "%s.class" (Identifier.to_string id)
+    | Class id -> sprintf "%s.class" (Identifier.to_string id)
 
   let to_code = function
     | Primitive x -> Primitive.to_code x
     | _ as x -> to_string x
+end
+
+module TypeDeclaration = struct
+  type t =
+    | Class of string
+    | Interface of string
+
+  let to_string = function
+    | Class name -> sprintf "class %s" name
+    | Interface name -> sprintf "interface %s" name
+
+  let to_code (type_def : t) =
+    let buffer = Buffer.create 256 in
+    let print = Buffer.add_string buffer in
+    begin match type_def with
+    | Class name -> print "class "; print name
+    | Interface name -> print "interface "; print name
+    end;
+    print " {\n"; (* TODO *) print "}\n";
+    Buffer.contents buffer
+end
+
+module CompilationUnit = struct
+  type t =
+    { comment: string option;
+      package: string option;
+      imports: string list;
+      defines: TypeDeclaration.t }
+
+  let create comment package imports defines =
+    { comment = comment;
+      package = package;
+      imports = imports;
+      defines = defines }
+
+  let to_string (file : t) = ""
+
+  let to_code (file : t) =
+    let buffer = Buffer.create 256 in
+    let print = Buffer.add_string buffer in
+    begin match file.comment with
+    | None -> () | Some s -> print "/* "; print s; print "*/\n\n"
+    end;
+    begin match file.package with
+    | None -> () | Some s -> print "package "; print s; print ";\n\n"
+    end;
+    List.iter (fun import -> print "import "; print import; print ";\n") file.imports;
+    print (if (List.length file.imports) = 0 then "" else "\n");
+    print (TypeDeclaration.to_code file.defines);
+    Buffer.contents buffer
 end
 
 let null = Literal.Null
