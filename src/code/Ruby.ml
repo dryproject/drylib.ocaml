@@ -6,7 +6,18 @@
 open DRY__Core
 
 module Stdlib = DRY__Stdlib
-module Printf = DRY__Stdlib.Printf
+
+let sprintf = Stdlib.Printf.sprintf
+
+module Comment = struct
+  type t = string
+
+  let of_string s = s
+
+  let to_code s = sprintf "# %s" s
+
+  let to_string s = s
+end
 
 module Literal = struct
   type t =
@@ -49,11 +60,11 @@ module Expression = struct
   let rec to_string = function
     | Literal x -> Literal.to_string x
     | Variable x -> Variable.to_string x
-    | Not x -> Printf.sprintf "(not %s)" (to_string x)
-    | And (x, y) -> Printf.sprintf "(%s and %s)" (to_string x) (to_string y)
-    | Or (x, y) -> Printf.sprintf "(%s or %s)" (to_string x) (to_string y)
-    | Return x -> Printf.sprintf "return (%s)" (to_string x)
-    | Yield x -> Printf.sprintf "yield (%s)" (to_string x)
+    | Not x -> sprintf "(not %s)" (to_string x)
+    | And (x, y) -> sprintf "(%s and %s)" (to_string x) (to_string y)
+    | Or (x, y) -> sprintf "(%s or %s)" (to_string x) (to_string y)
+    | Return x -> sprintf "return (%s)" (to_string x)
+    | Yield x -> sprintf "yield (%s)" (to_string x)
 
   let to_code = to_string
 end

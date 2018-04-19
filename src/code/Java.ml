@@ -30,7 +30,7 @@ let sprintf = Stdlib.Printf.sprintf
 module Comment = struct
   type t = string
 
-  let create s = s
+  let of_string s = s
 
   let to_code s = sprintf "/* %s */" s
 
@@ -141,7 +141,7 @@ module InterfaceDecl = struct
     { name = Identifier.of_string name;
       modifiers = modifiers;
       extends = extends;
-      comment = (match comment with "" -> None | s -> Some (Comment.create comment)); }
+      comment = (match comment with "" -> None | s -> Some (Comment.of_string comment)); }
 
   let to_code decl =
     let buffer = Buffer.create 256 in
@@ -194,7 +194,7 @@ module ClassDecl = struct
       modifiers = modifiers;
       extends = extends;
       implements = implements;
-      comment = (match comment with "" -> None | s -> Some (Comment.create comment)); }
+      comment = (match comment with "" -> None | s -> Some (Comment.of_string comment)); }
 
   let to_code decl =
     let buffer = Buffer.create 256 in
@@ -264,7 +264,7 @@ module CompilationUnit = struct
     { package = package;
       imports = (match imports with None -> [] | Some x -> x);
       defines = defines;
-      comment = (match comment with "" -> None | s -> Some (Comment.create comment)); }
+      comment = (match comment with "" -> None | s -> Some (Comment.of_string comment)); }
 
   let to_code (file : t) =
     let buffer = Buffer.create 256 in

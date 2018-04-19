@@ -2,6 +2,15 @@
 
 (** Java *)
 
+module Comment : sig
+  type t
+
+  val of_string : string -> t
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
 module Identifier = DRY__Core.Symbol
 
 module Boolean    = DRY__Core.Bool
@@ -14,15 +23,6 @@ module Float      = DRY__Core.Float32
 module Double     = DRY__Core.Float64
 
 module String     = DRY__Stdlib.String
-
-module Comment : sig
-  type t
-
-  val create : string -> t
-
-  val to_code : t -> string
-  val to_string : t -> string
-end
 
 module Primitive : sig
   type t =

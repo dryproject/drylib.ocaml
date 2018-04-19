@@ -7,7 +7,6 @@
 open DRY__Core
 
 module Stdlib  = DRY__Stdlib
-module Printf  = DRY__Stdlib.Printf
 
 module Name    = DRY__Core.Symbol
 
@@ -18,6 +17,18 @@ module Float   = DRY__Core.Float
 module Integer = DRY__Core.Int
 
 module String  = DRY__Stdlib.String
+
+let sprintf = Stdlib.Printf.sprintf
+
+module Comment = struct
+  type t = string
+
+  let of_string s = s
+
+  let to_code s = sprintf "-- %s" s
+
+  let to_string s = s
+end
 
 module Number = struct
   type t = Integer of Integer.t | Float of Float.t
@@ -66,7 +77,7 @@ module Value = struct
     | Nil -> "nil"
     | Boolean b -> Boolean.to_string b
     | Number n -> Number.to_string n
-    | String s -> Printf.sprintf "\"%s\"" s (* TODO: escape characters *)
+    | String s -> sprintf "\"%s\"" s (* TODO: escape characters *)
     | Function -> "<function>"
     | Userdata -> "<userdata>"
     | Thread -> "<thread>"
@@ -167,14 +178,14 @@ module Expression = struct
     | Literal x -> Value.to_string x
     | Variable v -> Name.to_string v
     | UnaryOperator (op, a) ->
-      Printf.sprintf "(%s %s)" (UnaryOperator.to_string op) (to_string a)
+      sprintf "(%s %s)" (UnaryOperator.to_string op) (to_string a)
     | BinaryOperator (op, a, b) ->
-      Printf.sprintf "(%s %s %s)" (to_string a) (BinaryOperator.to_string op) (to_string b)
+      sprintf "(%s %s %s)" (to_string a) (BinaryOperator.to_string op) (to_string b)
     | FunctionCall (name, args) ->
-      Printf.sprintf "%s(%s)" (Name.to_string name)
+      sprintf "%s(%s)" (Name.to_string name)
         (Stdlib.String.concat ", " (Stdlib.List.map to_string args))
     | FunctionDef (params, body) ->
-      Printf.sprintf "(function(%s) %s end)"
+      sprintf "(function(%s) %s end)"
         (Stdlib.String.concat ", " (Stdlib.List.map Name.to_string params))
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
     | TableConstructor -> "{}" (* TODO*)
@@ -198,22 +209,22 @@ module Statement = struct
     | Empty -> ""
     | Break -> "break"
     | Return None -> "return"
-    | Return Some expr -> Printf.sprintf "return %s" (Expression.to_string expr)
-    | Do body -> Printf.sprintf "do %s end" (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
+    | Return Some expr -> sprintf "return %s" (Expression.to_string expr)
+    | Do body -> sprintf "do %s end" (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
     | While (expr, body) ->
-      Printf.sprintf "while %s do %s end" (Expression.to_string expr)
+      sprintf "while %s do %s end" (Expression.to_string expr)
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
     | Repeat (expr, body) ->
-      Printf.sprintf "repeat %s until %s"
+      sprintf "repeat %s until %s"
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body)) (Expression.to_string expr)
     | If (test, then_body, else_body) ->
-      Printf.sprintf "if %s then %s else %s end" (Expression.to_string test)
+      sprintf "if %s then %s else %s end" (Expression.to_string test)
         (Stdlib.String.concat "; " (Stdlib.List.map to_string then_body))
         (Stdlib.String.concat "; " (Stdlib.List.map to_string else_body))
     | FunctionCall (name, args) ->
-      Printf.sprintf "%s(%s)" (Name.to_string name) (Stdlib.String.concat ", " (Stdlib.List.map to_string args))
+      sprintf "%s(%s)" (Name.to_string name) (Stdlib.String.concat ", " (Stdlib.List.map to_string args))
     | FunctionDef (name, params, body) ->
-      Printf.sprintf "function %s(%s) %s end" (Name.to_string name)
+      sprintf "function %s(%s) %s end" (Name.to_string name)
         (Stdlib.String.concat ", " (Stdlib.List.map Name.to_string params))
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
 

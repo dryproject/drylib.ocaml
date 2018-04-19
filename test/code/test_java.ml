@@ -63,5 +63,5 @@ let () =
   let input      = Java.CompilationUnit.create ~package ~imports class_def in
   let actual     = Java.CompilationUnit.to_code input in
   let expected   = "package test;\n\nimport dry.*;\n\npublic class b extends a implements x, y {\n}\n" in
-  Printf.eprintf "%s\n%!" actual;
+  (*Printf.eprintf "%s\n%!" actual;*)
   assert (actual = expected)

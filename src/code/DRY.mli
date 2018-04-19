@@ -2,6 +2,15 @@
 
 (** DRY *)
 
+module Comment : sig
+  type t
+
+  val of_string : string -> t
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
 module Location : sig
   type t = { line: int; column: int }
 end
