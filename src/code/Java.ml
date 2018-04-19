@@ -27,6 +27,16 @@ module String     = DRY__Stdlib.String
 
 let sprintf = Stdlib.Printf.sprintf
 
+module Comment = struct
+  type t = string
+
+  let create s = s
+
+  let to_code s = sprintf "/* %s */" s
+
+  let to_string s = s
+end
+
 module Primitive = struct
   type t =
     | Boolean of Boolean.t
@@ -46,46 +56,36 @@ module Primitive = struct
 
   let of_int z = Long (Long.of_int z)
 
-  let to_string = function
+  let to_code = function
     | Boolean b -> Boolean.to_string b
-    | Char c -> Char.to_string c
+    | Char c -> sprintf "'%s'" (Char.to_string c) (* FIXME *)
     | Byte z -> Byte.to_string z
     | Short z -> Short.to_string z
     | Int z -> Int.to_string z
-    | Long z -> Long.to_string z
-    | Float r -> Float.to_string r
-    | Double r -> Double.to_string r
-
-  let to_code = function
-    | Char c -> sprintf "'%s'" (Char.to_string c) (* FIXME *)
     | Long z -> sprintf "%sL" (Long.to_string z)
     | Float r -> sprintf "%sf" (Float.to_string r)
     | Double r -> sprintf "%sd" (Double.to_string r)
-    | _ as x -> to_string x
+
+  let to_string = function
+    | Char c -> Char.to_string c
+    | Long z -> Long.to_string z
+    | Float r -> Float.to_string r
+    | Double r -> Double.to_string r
+    | _ as x -> to_code x
 end
 
 module PrimitiveType = struct
   type t =
-    | Boolean
-    | Char
-    | Byte
-    | Short
-    | Int
-    | Long
-    | Float
-    | Double
+    | Boolean | Char
+    | Byte | Short | Int | Long
+    | Float | Double
 
-  let to_string = function
-    | Boolean -> "boolean"
-    | Char -> "char"
-    | Byte -> "byte"
-    | Short -> "short"
-    | Int -> "int"
-    | Long -> "long"
-    | Float -> "float"
-    | Double -> "double"
+  let to_code = function
+    | Boolean -> "boolean" | Char -> "char"
+    | Byte -> "byte" | Short -> "short" | Int -> "int" | Long -> "long"
+    | Float -> "float" | Double -> "double"
 
-  let to_code = to_string
+  let to_string = to_code
 end
 
 module Literal = struct
@@ -102,64 +102,185 @@ module Literal = struct
 
   let of_int z = Primitive (Primitive.of_int z)
 
-  let to_string = function
+  let to_code = function
     | Null -> "null"
-    | Primitive x -> Primitive.to_string x
+    | Primitive x -> Primitive.to_code x
     | Class id -> sprintf "%s.class" (Identifier.to_string id)
 
-  let to_code = function
-    | Primitive x -> Primitive.to_code x
-    | _ as x -> to_string x
+  let to_string = function
+    | Primitive x -> Primitive.to_string x
+    | _ as x -> to_code x
 end
 
-module TypeDeclaration = struct
+module InterfaceModifier = struct
+  (* See: https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-InterfaceModifier *)
+
   type t =
-    | Class of string
-    | Interface of string
+    | Public | Protected | Private
+    | Static | Strictfp
+    | Annotation of string
 
-  let to_string = function
-    | Class name -> sprintf "class %s" name
-    | Interface name -> sprintf "interface %s" name
+  let to_code = function
+    | Public -> "public" | Protected -> "protected" | Private -> "private"
+    | Static -> "static" | Strictfp -> "strictfp"
+    | Annotation s -> "@" ^ s
 
-  let to_code (type_def : t) =
+  let to_string = to_code
+end
+
+module InterfaceDecl = struct
+  (* See: https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-InterfaceDeclaration *)
+
+  type t =
+    { name: Identifier.t;
+      modifiers: InterfaceModifier.t list;
+      extends: Identifier.t list;
+      comment: Comment.t option; }
+
+  let create ?(comment = "") ?(modifiers = []) ?(extends = []) name =
+    { name = Identifier.of_string name;
+      modifiers = modifiers;
+      extends = extends;
+      comment = (match comment with "" -> None | s -> Some (Comment.create comment)); }
+
+  let to_code decl =
     let buffer = Buffer.create 256 in
     let print = Buffer.add_string buffer in
-    begin match type_def with
-    | Class name -> print "class "; print name
-    | Interface name -> print "interface "; print name
+    begin match decl.comment with
+    | None -> () | Some c -> print (Comment.to_code c); print "\n"
     end;
-    print " {\n"; (* TODO *) print "}\n";
+    print (String.concat " " (List.map InterfaceModifier.to_code decl.modifiers));
+    print (if (List.length decl.modifiers) = 0 then "" else " ");
+    print "interface ";
+    print (Identifier.to_string decl.name);
+    print (if (List.length decl.extends) = 0 then "" else " extends ");
+    print (String.concat ", " (List.map Identifier.to_string decl.extends));
+    print " {\n";
+    (* TODO: decl.body *)
+    print "}\n";
     Buffer.contents buffer
+
+  let to_string = to_code
+end
+
+module ClassModifier = struct
+  (* See: https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-ClassModifier *)
+
+  type t =
+    | Public | Protected | Private
+    | Abstract | Static | Final | Strictfp
+    | Annotation of string
+
+  let to_code = function
+    | Public -> "public" | Protected -> "protected" | Private -> "private"
+    | Abstract -> "abstract" | Static -> "static" | Final -> "final" | Strictfp -> "strictfp"
+    | Annotation s -> "@" ^ s
+
+  let to_string = to_code
+end
+
+module ClassDecl = struct
+  (* See: https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-ClassDeclaration *)
+
+  type t =
+    { name: Identifier.t;
+      modifiers: ClassModifier.t list;
+      extends: Identifier.t option;
+      implements: Identifier.t list;
+      comment: Comment.t option; }
+
+  let create ?(comment = "") ?(modifiers = []) ?extends ?(implements = []) name =
+    { name = Identifier.of_string name;
+      modifiers = modifiers;
+      extends = extends;
+      implements = implements;
+      comment = (match comment with "" -> None | s -> Some (Comment.create comment)); }
+
+  let to_code decl =
+    let buffer = Buffer.create 256 in
+    let print = Buffer.add_string buffer in
+    begin match decl.comment with
+    | None -> () | Some c -> print (Comment.to_code c); print "\n"
+    end;
+    print (String.concat " " (List.map ClassModifier.to_code decl.modifiers));
+    print (if (List.length decl.modifiers) = 0 then "" else " ");
+    print "class ";
+    print (Identifier.to_string decl.name);
+    begin match decl.extends with
+    | None -> () | Some x -> print " extends "; print (Identifier.to_string x)
+    end;
+    print (if (List.length decl.implements) = 0 then "" else " implements ");
+    print (String.concat ", " (List.map Identifier.to_string decl.implements));
+    print " {\n";
+    (* TODO: decl.body *)
+    print "}\n";
+    Buffer.contents buffer
+
+  let to_string = to_code
+end
+
+module TypeDecl = struct
+  type t =
+    | Interface of InterfaceDecl.t
+    | Class of ClassDecl.t
+
+  let to_code = function
+    | Class decl -> ClassDecl.to_code decl
+    | Interface decl -> InterfaceDecl.to_code decl
+
+  let to_string = to_code
+end
+
+module PackageDecl = struct
+  type t =
+    | Normal of string
+
+  let to_code = function
+    | Normal s -> sprintf "package %s;\n" s
+
+  let to_string = to_code
+end
+
+module ImportDecl = struct
+  type t =
+    | Normal of string
+    | Static of string
+
+  let to_code = function
+    | Normal s -> sprintf "import %s;\n" s
+    | Static s -> sprintf "import static %s;\n" s
+
+  let to_string = to_code
 end
 
 module CompilationUnit = struct
   type t =
-    { comment: string option;
-      package: string option;
-      imports: string list;
-      defines: TypeDeclaration.t }
+    { package: PackageDecl.t option;
+      imports: ImportDecl.t list;
+      defines: TypeDecl.t;
+      comment: Comment.t option; }
 
-  let create comment package imports defines =
-    { comment = comment;
-      package = package;
-      imports = imports;
-      defines = defines }
-
-  let to_string (file : t) = ""
+  let create ?(comment = "") ?package ?imports defines =
+    { package = package;
+      imports = (match imports with None -> [] | Some x -> x);
+      defines = defines;
+      comment = (match comment with "" -> None | s -> Some (Comment.create comment)); }
 
   let to_code (file : t) =
     let buffer = Buffer.create 256 in
     let print = Buffer.add_string buffer in
     begin match file.comment with
-    | None -> () | Some s -> print "/* "; print s; print "*/\n\n"
+    | None -> () | Some c -> print (Comment.to_code c); print "\n\n"
     end;
     begin match file.package with
-    | None -> () | Some s -> print "package "; print s; print ";\n\n"
+    | None -> () | Some p -> print (PackageDecl.to_code p); print "\n"
     end;
-    List.iter (fun import -> print "import "; print import; print ";\n") file.imports;
+    List.iter (fun import -> print (ImportDecl.to_code import)) file.imports;
     print (if (List.length file.imports) = 0 then "" else "\n");
-    print (TypeDeclaration.to_code file.defines);
+    print (TypeDecl.to_code file.defines);
     Buffer.contents buffer
+
+  let to_string = to_code
 end
 
 let null = Literal.Null

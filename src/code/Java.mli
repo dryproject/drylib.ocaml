@@ -15,6 +15,15 @@ module Double     = DRY__Core.Float64
 
 module String     = DRY__Stdlib.String
 
+module Comment : sig
+  type t
+
+  val create : string -> t
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
 module Primitive : sig
   type t =
     | Boolean of Boolean.t
@@ -26,9 +35,8 @@ module Primitive : sig
     | Float of Float.t
     | Double of Double.t
 
-  val to_string : t -> string
-
   val to_code : t -> string
+  val to_string : t -> string
 end
 
 module PrimitiveType : sig
@@ -42,9 +50,8 @@ module PrimitiveType : sig
     | Float
     | Double
 
-  val to_string : t -> string
-
   val to_code : t -> string
+  val to_string : t -> string
 end
 
 module Literal : sig
@@ -53,33 +60,110 @@ module Literal : sig
     | Primitive of Primitive.t
     | Class of Identifier.t
 
-  val to_string : t -> string
-
   val to_code : t -> string
+  val to_string : t -> string
 end
 
-module TypeDeclaration : sig
+module InterfaceModifier : sig
   type t =
-    | Class of string
-    | Interface of string
-
-  val to_string : t -> string
+    | Public | Protected | Private
+    | Static | Strictfp
+    | Annotation of string
 
   val to_code : t -> string
+  val to_string : t -> string
+end
+
+module InterfaceDecl : sig
+  type t =
+    { name: Identifier.t;
+      modifiers: InterfaceModifier.t list;
+      extends: Identifier.t list;
+      comment: Comment.t option; }
+
+  val create :
+    ?comment:string ->
+    ?modifiers:InterfaceModifier.t list ->
+    ?extends:Identifier.t list ->
+    string ->
+    t
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
+module ClassModifier : sig
+  type t =
+    | Public | Protected | Private
+    | Abstract | Static | Final | Strictfp
+    | Annotation of string
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
+module ClassDecl : sig
+  type t =
+    { name: Identifier.t;
+      modifiers: ClassModifier.t list;
+      extends: Identifier.t option;
+      implements: Identifier.t list;
+      comment: Comment.t option; }
+
+  val create :
+    ?comment:string ->
+    ?modifiers:ClassModifier.t list ->
+    ?extends:Identifier.t ->
+    ?implements:Identifier.t list ->
+    string ->
+    t
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
+module TypeDecl : sig
+  type t =
+    | Interface of InterfaceDecl.t
+    | Class of ClassDecl.t
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
+module PackageDecl : sig
+  type t =
+    | Normal of string
+
+  val to_code : t -> string
+  val to_string : t -> string
+end
+
+module ImportDecl : sig
+  type t =
+    | Normal of string
+    | Static of string
+
+  val to_code : t -> string
+  val to_string : t -> string
 end
 
 module CompilationUnit : sig
   type t =
-    { comment: string option;
-      package: string option;
-      imports: string list;
-      defines: TypeDeclaration.t }
+    { package: PackageDecl.t option;
+      imports: ImportDecl.t list;
+      defines: TypeDecl.t;
+      comment: Comment.t option; }
 
-  val create : string option -> string option -> string list -> TypeDeclaration.t -> t
-
-  val to_string : t -> string
+  val create :
+    ?comment:string ->
+    ?package:PackageDecl.t ->
+    ?imports:ImportDecl.t list ->
+    TypeDecl.t ->
+    t
 
   val to_code : t -> string
+  val to_string : t -> string
 end
 
 val null : Literal.t

@@ -53,10 +53,15 @@ let () = assert (Java.to_code @@ Java.double 1.23 = "1.23d")
 (* Java.CompilationUnit *)
 
 let () =
-  let package   = "test" in
-  let imports   = ["dry.*"] in
-  let class_def = Java.TypeDeclaration.Class "hello" in
-  let input     = Java.CompilationUnit.create None (Some package) imports class_def in
-  let actual    = Java.CompilationUnit.to_code input in
-  let expected  = "package test;\n\nimport dry.*;\n\nclass hello {\n}\n" in
+  let modifiers  = [Java.ClassModifier.Public] in
+  let imports    = [Java.ImportDecl.Normal "dry.*"] in
+  let extends    = Java.Identifier.of_string "a" in
+  let implements = [Java.Identifier.of_string "x"; Java.Identifier.of_string "y"] in
+  let class_decl = Java.ClassDecl.create "b" ~modifiers ~extends ~implements in
+  let class_def  = Java.TypeDecl.Class class_decl in
+  let package    = Java.PackageDecl.Normal "test" in
+  let input      = Java.CompilationUnit.create ~package ~imports class_def in
+  let actual     = Java.CompilationUnit.to_code input in
+  let expected   = "package test;\n\nimport dry.*;\n\npublic class b extends a implements x, y {\n}\n" in
+  Printf.eprintf "%s\n%!" actual;
   assert (actual = expected)
