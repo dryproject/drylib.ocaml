@@ -8,4 +8,6 @@ val of_int : int -> t
 
 val to_char : t -> char
 
+val to_int : t -> int
+
 val to_string : t -> string

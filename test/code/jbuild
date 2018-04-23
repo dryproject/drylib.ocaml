@@ -3,7 +3,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_c test_cpp test_d test_dart test_dry test_elixir test_go test_java test_js test_julia test_kotlin test_lisp test_lua test_ocaml test_php test_python test_ruby test_rust))
+ ((names (test_c test_cpp test_d test_dart test_dry test_elixir test_go test_java test_js test_julia test_kotlin test_lisp test_lua test_ocaml test_php test_python test_ruby test_rust test_wasm))
   (libraries (DRY__Code))))
 
 (alias
