@@ -41,3 +41,5 @@ let () = assert (Wasm.to_code @@ Wasm.f32 1.23 = "1.23")
 let () = assert (Wasm.to_code @@ Wasm.f64 1.23 = "1.23")
 
 (* Wasm.Module *)
+
+let () = assert (Wasm.Module.to_code @@ Wasm.Module.create () = "(module)\n")

@@ -49,6 +49,12 @@ end
 module Module : sig
   type t
 
+  val create :
+    ?imports:string list ->
+    ?exports:string list ->
+    unit ->
+    t
+
   val to_code : t -> string
   val to_string : t -> string
 end

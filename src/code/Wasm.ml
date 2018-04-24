@@ -72,9 +72,32 @@ module Expression = struct
 end
 
 module Module = struct
-  type t
+  type t =
+    { types: string list;
+      funcs: string list;
+      tables: string list;
+      mems: string list;
+      globals: string list;
+      elem: string list;
+      data: string list;
+      start: string option;
+      imports: string list;
+      exports: string list; }
 
-  let to_code (x : t) = "" (* TODO *)
+  let create ?imports ?exports () =
+    { types = [];
+      funcs = [];
+      tables = [];
+      mems = [];
+      globals = [];
+      elem = [];
+      data = [];
+      start = None;
+      imports = (match imports with None -> [] | Some x -> x);
+      exports = (match exports with None -> [] | Some x -> x); }
+
+  let to_code (x : t) =
+    "(module)\n" (* TODO *)
 
   let to_string = to_code
 end
