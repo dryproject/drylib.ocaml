@@ -6,25 +6,25 @@ module Core = DRY__Core
 
 module Bool = DRY__Core.Bool
 
-let () = assert (Bool.of_bool(true) = true)
+let () = assert (Bool.of_bool true = true)
 
-let () = assert (Bool.of_bool(false) = false)
+let () = assert (Bool.of_bool false = false)
 
-let () = assert (Bool.of_bool(true) != false)
+let () = assert (Bool.of_bool true != false)
 
-let () = assert (Bool.to_string(true) = "true")
+let () = assert (Bool.to_string true = "true")
 
-let () = assert (Bool.to_string(false) = "false")
+let () = assert (Bool.to_string false = "false")
 
 (* Core.Char *)
 
 module Char = DRY__Core.Char
 
-let () = assert (Char.of_int(0) = Char.of_int(0))
+let () = assert (Char.of_int 0 = Char.of_int 0)
 
-let () = assert (Char.of_char('a') = Char.of_char('a'))
+let () = assert (Char.of_char 'a' = Char.of_char 'a')
 
-let () = assert (Char.of_char('a') != Char.of_char('b'))
+let () = assert (Char.of_char 'a' != Char.of_char 'b')
 
 (* Core.Complex *)
 

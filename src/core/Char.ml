@@ -9,6 +9,10 @@ let of_char = Uchar.of_char
 
 let of_int = Uchar.of_int
 
+let as_int32 c = Uchar.to_int c |> Int32.of_int
+
+let as_int64 c = Uchar.to_int c |> Int64.of_int
+
 let to_char = Uchar.to_char
 
 let to_int = Uchar.to_int

@@ -9,6 +9,13 @@ type t =
 
 let of_int z = Int64 (Int64.of_int z)
 
+let as_int32 = function
+  | Int8 z   -> Int8.as_int32 z
+  | Int16 z  -> Int16.as_int32 z
+  | Int32 z  -> z
+  | Int64 z  -> assert false (* TODO *)
+  | Int128 _ -> assert false (* TODO *)
+
 let as_int64 = function
   | Int8 z   -> Int8.as_int64 z
   | Int16 z  -> Int16.as_int64 z
