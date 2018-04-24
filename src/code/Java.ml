@@ -7,6 +7,7 @@ open DRY__Core
 
 module Stdlib     = DRY__Stdlib
 module Buffer     = Stdlib.Buffer
+module Format     = Stdlib.Format
 module List       = Stdlib.List
 
 (* Syntactic constructs *)
@@ -35,6 +36,9 @@ module Comment = struct
   let to_code s = sprintf "/* %s */" s
 
   let to_string s = s
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Primitive = struct
@@ -72,6 +76,9 @@ module Primitive = struct
     | Float r -> Float.to_string r
     | Double r -> Double.to_string r
     | _ as x -> to_code x
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module PrimitiveType = struct
@@ -86,6 +93,9 @@ module PrimitiveType = struct
     | Float -> "float" | Double -> "double"
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Literal = struct
@@ -110,6 +120,9 @@ module Literal = struct
   let to_string = function
     | Primitive x -> Primitive.to_string x
     | _ as x -> to_code x
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module InterfaceModifier = struct
@@ -126,6 +139,9 @@ module InterfaceModifier = struct
     | Annotation s -> "@" ^ s
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module InterfaceDecl = struct
@@ -161,6 +177,9 @@ module InterfaceDecl = struct
     Buffer.contents buffer
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module ClassModifier = struct
@@ -177,6 +196,9 @@ module ClassModifier = struct
     | Annotation s -> "@" ^ s
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module ClassDecl = struct
@@ -217,6 +239,9 @@ module ClassDecl = struct
     Buffer.contents buffer
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module TypeDecl = struct
@@ -229,6 +254,9 @@ module TypeDecl = struct
     | Interface decl -> InterfaceDecl.to_code decl
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module PackageDecl = struct
@@ -239,6 +267,9 @@ module PackageDecl = struct
     | Normal s -> sprintf "package %s;\n" s
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module ImportDecl = struct
@@ -251,6 +282,9 @@ module ImportDecl = struct
     | Static s -> sprintf "import static %s;\n" s
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module CompilationUnit = struct
@@ -281,34 +315,26 @@ module CompilationUnit = struct
     Buffer.contents buffer
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 let null = Literal.Null
-
 let boolean b = Literal.Primitive (Primitive.Boolean b)
-
 let char c = Literal.Primitive (Primitive.Char c)
-
 let byte z = Literal.Primitive (Primitive.Byte z)
-
 let short z = Literal.Primitive (Primitive.Short z)
-
 let int z = Literal.Primitive (Primitive.Int z)
-
 let long z = Literal.Primitive (Primitive.Long z)
-
 let float r = Literal.Primitive (Primitive.Float r)
-
 let double r = Literal.Primitive (Primitive.Double r)
 
 let of_bool = Literal.of_bool
-
 let of_char = Literal.of_char
-
 let of_float = Literal.of_float
-
 let of_int = Literal.of_int
 
-let to_string = Literal.to_string
-
 let to_code = Literal.to_code
+let to_string = Literal.to_string
+let print = Literal.print

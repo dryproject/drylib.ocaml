@@ -11,6 +11,7 @@
 open DRY__Core
 
 module Stdlib     = DRY__Stdlib
+module Format     = Stdlib.Format
 
 (* Scalar types *)
 module Boolean    = DRY__Core.Bool
@@ -31,6 +32,9 @@ module Comment = struct
   let to_code s = sprintf "/* %s */" s
 
   let to_string s = s
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Primitive = struct
@@ -57,6 +61,9 @@ module Primitive = struct
   let to_code = function
     | String s -> sprintf "\"%s\"" s (* FIXME *)
     | _ as x -> to_string x
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module PrimitiveType = struct
@@ -73,6 +80,9 @@ module PrimitiveType = struct
     | String -> "string"
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Literal = struct
@@ -95,26 +105,22 @@ module Literal = struct
   let to_code = function
     | Primitive x -> Primitive.to_code x
     | _ as x -> to_string x
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 let null = Literal.Null
-
 let boolean b = Literal.Primitive (Primitive.Boolean b)
-
 let float r = Literal.Primitive (Primitive.Float r)
-
 let integer z = Literal.Primitive (Primitive.Integer z)
-
 let string s = Literal.Primitive (Primitive.String s)
 
 let of_bool = Literal.of_bool
-
 let of_float = Literal.of_float
-
 let of_int = Literal.of_int
-
 let of_string = Literal.of_string
 
-let to_string = Literal.to_string
-
 let to_code = Literal.to_code
+let to_string = Literal.to_string
+let print = Literal.print

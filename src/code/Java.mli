@@ -9,6 +9,8 @@ module Comment : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module Identifier = DRY__Core.Symbol
@@ -37,6 +39,8 @@ module Primitive : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module PrimitiveType : sig
@@ -52,6 +56,8 @@ module PrimitiveType : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module Literal : sig
@@ -62,6 +68,8 @@ module Literal : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module InterfaceModifier : sig
@@ -72,6 +80,8 @@ module InterfaceModifier : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module InterfaceDecl : sig
@@ -90,6 +100,8 @@ module InterfaceDecl : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module ClassModifier : sig
@@ -100,6 +112,8 @@ module ClassModifier : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module ClassDecl : sig
@@ -120,6 +134,8 @@ module ClassDecl : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module TypeDecl : sig
@@ -129,6 +145,8 @@ module TypeDecl : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module PackageDecl : sig
@@ -137,6 +155,8 @@ module PackageDecl : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module ImportDecl : sig
@@ -146,6 +166,8 @@ module ImportDecl : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module CompilationUnit : sig
@@ -164,34 +186,26 @@ module CompilationUnit : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 val null : Literal.t
-
 val boolean : Boolean.t -> Literal.t
-
 val char : Char.t -> Literal.t
-
 val byte : Byte.t -> Literal.t
-
 val short : Short.t -> Literal.t
-
 val int : Int.t -> Literal.t
-
 val long : Long.t -> Literal.t
-
 val float : Float.t -> Literal.t
-
 val double : Double.t -> Literal.t
 
 val of_bool : bool -> Literal.t
-
 val of_char : char -> Literal.t
-
 val of_float : float -> Literal.t
-
 val of_int : int -> Literal.t
 
 val to_string : Literal.t -> string
-
 val to_code : Literal.t -> string
+
+val print : Format.formatter -> Literal.t -> unit

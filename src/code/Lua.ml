@@ -7,15 +7,12 @@
 open DRY__Core
 
 module Stdlib  = DRY__Stdlib
+module Format  = Stdlib.Format
 
 module Name    = DRY__Core.Symbol
-
 module Boolean = DRY__Core.Bool
-
 module Float   = DRY__Core.Float
-
 module Integer = DRY__Core.Int
-
 module String  = DRY__Stdlib.String
 
 let sprintf = Stdlib.Printf.sprintf
@@ -28,6 +25,9 @@ module Comment = struct
   let to_code s = sprintf "-- %s" s
 
   let to_string s = s
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Number = struct
@@ -42,6 +42,9 @@ module Number = struct
     | Float r -> Float.to_string r
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Function = struct
@@ -84,6 +87,9 @@ module Value = struct
     | Table -> "{}" (* TODO *)
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Type = struct
@@ -118,6 +124,9 @@ module Type = struct
     | Table -> "table"
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module UnaryOperator = struct
@@ -130,6 +139,9 @@ module UnaryOperator = struct
     | Not -> "not"
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module BinaryOperator = struct
@@ -162,6 +174,9 @@ module BinaryOperator = struct
     | Or -> "or"
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Expression = struct
@@ -191,6 +206,9 @@ module Expression = struct
     | TableConstructor -> "{}" (* TODO*)
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Statement = struct
@@ -229,6 +247,9 @@ module Statement = struct
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Block = struct
@@ -238,34 +259,26 @@ module Block = struct
     Stdlib.String.concat "; " (Stdlib.List.map Statement.to_string block)
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 let nil = Expression.Literal Value.Nil
-
 let empty_table = Expression.Literal Value.Table
-
 let empty_string = Expression.Literal (Value.String "")
-
 let boolean b = Expression.Literal (Value.of_bool b)
-
 let number n = Expression.Literal (Value.Number n)
-
 let float r = number (Number.Float r)
-
 let integer z = number (Number.Integer z)
-
 let string s = Expression.Literal (Value.String s)
-
 let var name = Expression.Variable (Name.of_string name)
 
 let of_bool = boolean
-
 let of_float r = number (Number.of_float r)
-
 let of_int z = number (Number.of_int z)
-
 let of_string = string
 
-let to_string = Expression.to_string
-
 let to_code = Expression.to_code
+let to_string = Expression.to_string
+let print = Expression.print

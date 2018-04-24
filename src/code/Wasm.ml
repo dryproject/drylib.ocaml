@@ -4,9 +4,12 @@
 
 open DRY__Core
 
+module Stdlib = DRY__Stdlib
+module Format = Stdlib.Format
+
 module Identifier = DRY__Core.Symbol
 
-let sprintf = DRY__Stdlib.Printf.sprintf
+let sprintf = Stdlib.Printf.sprintf
 
 module Comment = struct
   type t = string
@@ -16,6 +19,9 @@ module Comment = struct
   let to_code s = sprintf ";; %s" s
 
   let to_string s = s
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module I32 = DRY__Core.Int32
@@ -43,6 +49,9 @@ module Value = struct
     | F64 x -> F64.to_string x
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module ValueType = struct
@@ -53,6 +62,9 @@ module ValueType = struct
     | F32 -> "f32" | F64 -> "f64"
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Instruction = struct
@@ -61,6 +73,9 @@ module Instruction = struct
   let to_code (x : t) = "" (* TODO *)
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Expression = struct
@@ -69,6 +84,9 @@ module Expression = struct
   let to_code (x : t) = "" (* TODO *)
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Module = struct
@@ -100,6 +118,9 @@ module Module = struct
     "(module)\n" (* TODO *)
 
   let to_string = to_code
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 let i32 z = Value.I32 z
@@ -114,3 +135,4 @@ let of_int = Value.of_int
 
 let to_string = Value.to_string
 let to_code = Value.to_code
+let print = Value.print

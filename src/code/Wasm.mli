@@ -10,6 +10,8 @@ module Comment : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module I32 = DRY__Core.Int32
@@ -25,6 +27,8 @@ module Value : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 (* See: https://webassembly.github.io/spec/core/syntax/types.html#value-types *)
@@ -33,6 +37,8 @@ module ValueType : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 (* See: https://webassembly.github.io/spec/core/syntax/instructions.html *)
@@ -57,6 +63,8 @@ module Module : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 val i32 : I32.t -> Value.t
@@ -78,3 +86,5 @@ val of_int : int -> Value.t
 val to_string : Value.t -> string
 
 val to_code : Value.t -> string
+
+val print : Format.formatter -> Value.t -> unit

@@ -6,6 +6,7 @@
 open DRY__Core
 
 module Stdlib = DRY__Stdlib
+module Format = Stdlib.Format
 
 let sprintf = Stdlib.Printf.sprintf
 
@@ -17,6 +18,9 @@ module Comment = struct
   let to_code s = sprintf "# %s" s
 
   let to_string s = s
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Literal = struct
@@ -31,6 +35,9 @@ module Literal = struct
     | String s -> "\"" ^ s ^ "\"" (* TODO: escaping *)
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Variable = struct
@@ -45,6 +52,9 @@ module Variable = struct
     | Self -> "self"
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Expression = struct
@@ -67,6 +77,9 @@ module Expression = struct
     | Yield x -> sprintf "yield (%s)" (to_string x)
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 module Program = struct
@@ -76,26 +89,22 @@ module Program = struct
     Stdlib.String.concat "\n" (Stdlib.List.map Expression.to_string prog)
 
   let to_code = to_string
+
+  let print ppf code =
+    to_code code |> Format.pp_print_string ppf
 end
 
 let number n = Expression.Literal (Literal.Number n)
-
 let symbol s = Expression.Literal (Literal.Symbol s)
-
 let string s = Expression.Literal (Literal.String s)
-
 let var name = Expression.Variable (Variable.Varname name)
-
 let nil = Expression.Variable Variable.Nil
-
 let self = Expression.Variable Variable.Self
 
 let of_int z = number (Number.of_int z)
-
 let of_float r = number (Number.of_float r)
-
 let of_string = string
 
-let to_string = Expression.to_string
-
 let to_code = Expression.to_code
+let to_string = Expression.to_string
+let print = Expression.print

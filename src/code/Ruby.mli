@@ -9,6 +9,8 @@ module Comment : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module Literal : sig
@@ -17,9 +19,10 @@ module Literal : sig
     | Symbol of string
     | String of string
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Variable : sig
@@ -28,9 +31,10 @@ module Variable : sig
     | Nil
     | Self
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Expression : sig
@@ -43,37 +47,33 @@ module Expression : sig
     | Return of t
     | Yield of t
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Program : sig
   type t = Expression.t list
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 val number : DRY__Core.Number.t -> Expression.t
-
 val symbol : string -> Expression.t
-
 val string : string -> Expression.t
-
 val var : string -> Expression.t
-
 val nil : Expression.t
-
 val self : Expression.t
 
 val of_int : int -> Expression.t
-
 val of_float : float -> Expression.t
-
 val of_string : string -> Expression.t
 
+val to_code : Expression.t -> string
 val to_string : Expression.t -> string
 
-val to_code : Expression.t -> string
+val print : Format.formatter -> Expression.t -> unit

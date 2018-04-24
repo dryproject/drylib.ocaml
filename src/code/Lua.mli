@@ -9,6 +9,8 @@ module Comment : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module Name    = DRY__Core.Symbol
@@ -22,12 +24,12 @@ module Number : sig
   type t = Integer of Integer.t | Float of Float.t
 
   val of_float : float -> t
-
   val of_int : int -> t
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Function : sig
@@ -52,14 +54,13 @@ module Value : sig
   val nil : t
 
   val of_bool : bool -> t
-
   val of_float : float -> t
-
   val of_int : int -> t
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Type : sig
@@ -75,17 +76,19 @@ module Type : sig
 
   val of_value : Value.t -> t
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module UnaryOperator : sig
   type t = Neg | BNot | Len | Not
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module BinaryOperator : sig
@@ -94,9 +97,10 @@ module BinaryOperator : sig
     | BAnd | BOr | BXor | Shl | Shr | Concat
     | Eq | Lt | Le | Ne | Gt | Ge | And | Or
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Expression : sig
@@ -109,9 +113,10 @@ module Expression : sig
     | FunctionDef of Name.t list * t list
     | TableConstructor
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Statement : sig
@@ -126,18 +131,20 @@ module Statement : sig
     | FunctionCall of Name.t * t list
     | FunctionDef of Name.t * Name.t list * t list
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 (** A block is a list of statements. *)
 module Block : sig
   type t = Statement.t list
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 val nil : Expression.t
@@ -156,5 +163,7 @@ val of_float : float -> Expression.t
 val of_int : int -> Expression.t
 val of_string : string -> Expression.t
 
-val to_string : Expression.t -> string
 val to_code : Expression.t -> string
+val to_string : Expression.t -> string
+
+val print : Format.formatter -> Expression.t -> unit

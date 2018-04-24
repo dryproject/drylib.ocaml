@@ -9,6 +9,8 @@ module Comment : sig
 
   val to_code : t -> string
   val to_string : t -> string
+
+  val print : Format.formatter -> t -> unit
 end
 
 module Boolean    = DRY__Core.Bool
@@ -23,9 +25,10 @@ module Primitive : sig
     | Integer of Integer.t
     | String of String.t
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module PrimitiveType : sig
@@ -35,9 +38,10 @@ module PrimitiveType : sig
     | Integer
     | String
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 module Literal : sig
@@ -45,29 +49,24 @@ module Literal : sig
     | Null
     | Primitive of Primitive.t
 
+  val to_code : t -> string
   val to_string : t -> string
 
-  val to_code : t -> string
+  val print : Format.formatter -> t -> unit
 end
 
 val null : Literal.t
-
 val boolean : Boolean.t -> Literal.t
-
 val float : Float.t -> Literal.t
-
 val integer : Integer.t -> Literal.t
-
 val string : String.t -> Literal.t
 
 val of_bool : bool -> Literal.t
-
 val of_float : float -> Literal.t
-
 val of_int : int -> Literal.t
-
 val of_string : string -> Literal.t
 
+val to_code : Literal.t -> string
 val to_string : Literal.t -> string
 
-val to_code : Literal.t -> string
+val print : Format.formatter -> Literal.t -> unit
