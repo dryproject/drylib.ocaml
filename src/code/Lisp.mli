@@ -55,6 +55,8 @@ end
 module Expression : sig
   type t = Object.t
 
+  val make : Object.t list -> t
+
   val of_bool : bool -> t
   val of_char : char -> t
   val of_float : float -> t
@@ -66,10 +68,24 @@ module Expression : sig
   val print : Format.formatter -> t -> unit
 end
 
+module Program : sig
+  type t = Expression.t list
+
+  val make : Expression.t list -> t
+
+  val print : Format.formatter -> t -> unit
+end
+
 val nil : Expression.t
 val t : Expression.t
 
-val make : Object.t list -> Expression.t
+val form : Object.t list -> Expression.t
+val quote : Object.t list -> Expression.t
+
+val character : Character.t -> Expression.t
+val number : Number.t -> Expression.t
+val string : String.t -> Expression.t
+val symbol : Symbol.t -> Expression.t
 
 val of_bool : bool -> Expression.t
 val of_char : char -> Expression.t

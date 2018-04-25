@@ -55,8 +55,8 @@ let () = assert (to_code @@ Lisp.of_int 42 = "42")
 
 let () = assert (to_code @@ Lisp.of_string "foobar" = "\"foobar\"")
 
-let () = assert (to_code @@ Lisp.make [] = "()")
+let () = assert (to_code @@ Lisp.quote [] = "()")
 
-let () = assert (to_code @@ Lisp.make [Lisp.nil] = "(nil)")
+let () = assert (to_code @@ Lisp.quote [Lisp.nil] = "(nil)")
 
-let () = assert (to_code @@ Lisp.make [Lisp.of_int 1; Lisp.of_int 2; Lisp.of_int 3] = "(1 2 3)")
+let () = assert (to_code @@ Lisp.quote [Lisp.of_int 1; Lisp.of_int 2; Lisp.of_int 3] = "(1 2 3)")
