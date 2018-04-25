@@ -13,6 +13,10 @@ let of_float f = Float (Float.of_float f)
 
 let of_int n = Int (Int.of_int n)
 
+let of_int32 n = Int (Int.Int32 n)
+
+let of_int64 n = Int (Int.Int64 n)
+
 let to_string = function
   | Complex c  -> Complex.to_string c
   | Float r    -> Float.to_string r
