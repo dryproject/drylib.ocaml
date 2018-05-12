@@ -109,6 +109,7 @@ module Expression : sig
     | Variable of Name.t
     | UnaryOperator of UnaryOperator.t * t
     | BinaryOperator of BinaryOperator.t * t * t
+    | If of t * t * t
     | FunctionCall of Name.t * t list
     | FunctionDef of Name.t list * t list
     | TableConstructor

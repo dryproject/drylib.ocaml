@@ -185,6 +185,7 @@ module Expression = struct
     | Variable of Name.t
     | UnaryOperator of UnaryOperator.t * t
     | BinaryOperator of BinaryOperator.t * t * t
+    | If of t * t * t
     | FunctionCall of Name.t * t list
     | FunctionDef of Name.t list * t list
     | TableConstructor (* TODO*)
@@ -196,6 +197,12 @@ module Expression = struct
       sprintf "(%s %s)" (UnaryOperator.to_string op) (to_string a)
     | BinaryOperator (op, a, b) ->
       sprintf "(%s %s %s)" (to_string a) (BinaryOperator.to_string op) (to_string b)
+    | If (test, then_body, else_body) ->
+      (* See: http://lua-users.org/wiki/TernaryOperator *)
+      sprintf "(function() if %s then return %s else return %s end end)()"
+        (to_string test)
+        (to_string then_body)
+        (to_string else_body)
     | FunctionCall (name, args) ->
       sprintf "%s(%s)" (Name.to_string name)
         (Stdlib.String.concat ", " (Stdlib.List.map to_string args))
@@ -236,7 +243,8 @@ module Statement = struct
       sprintf "repeat %s until %s"
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body)) (Expression.to_string expr)
     | If (test, then_body, else_body) ->
-      sprintf "if %s then %s else %s end" (Expression.to_string test)
+      sprintf "if %s then %s else %s end"
+        (Expression.to_string test)
         (Stdlib.String.concat "; " (Stdlib.List.map to_string then_body))
         (Stdlib.String.concat "; " (Stdlib.List.map to_string else_body))
     | FunctionCall (name, args) ->
