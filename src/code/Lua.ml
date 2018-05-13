@@ -263,6 +263,8 @@ end
 module Block = struct
   type t = Statement.t list
 
+  let make statements = statements
+
   let to_string block =
     Stdlib.String.concat "; " (Stdlib.List.map Statement.to_string block)
 

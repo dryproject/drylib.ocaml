@@ -142,6 +142,8 @@ end
 module Block : sig
   type t = Statement.t list
 
+  val make : Statement.t list -> t
+
   val to_code : t -> string
   val to_string : t -> string
 
