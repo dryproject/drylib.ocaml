@@ -229,6 +229,8 @@ module Statement = struct
     | If of Expression.t * t list * t list
     | FunctionCall of Name.t * t list
     | FunctionDef of Name.t * Name.t list * t list
+    | LocalVarBind of Name.t * Expression.t
+    | LocalVarsBind of Name.t list * Expression.t list
 
   let rec to_string = function
     | Empty -> ""
@@ -253,6 +255,12 @@ module Statement = struct
       sprintf "function %s(%s) %s end" (Name.to_string name)
         (Stdlib.String.concat ", " (Stdlib.List.map Name.to_string params))
         (Stdlib.String.concat "; " (Stdlib.List.map to_string body))
+    | LocalVarBind (name, value) ->
+      sprintf "local %s = %s" (Name.to_string name) (Expression.to_string value)
+    | LocalVarsBind (names, values) ->
+      sprintf "local %s = %s"
+        (Stdlib.String.concat ", " (Stdlib.List.map Name.to_string names))
+        (Stdlib.String.concat ", " (Stdlib.List.map Expression.to_string values))
 
   let to_code = to_string
 

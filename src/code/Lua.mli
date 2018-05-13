@@ -131,6 +131,8 @@ module Statement : sig
     | If of Expression.t * t list * t list
     | FunctionCall of Name.t * t list
     | FunctionDef of Name.t * Name.t list * t list
+    | LocalVarBind of Name.t * Expression.t
+    | LocalVarsBind of Name.t list * Expression.t list
 
   val to_code : t -> string
   val to_string : t -> string
