@@ -4,4 +4,4 @@
 
 (library
  ((name DRY__Text)
-  (libraries (DRY__Core))))
+  (libraries (DRY__Core DRY__Stdlib str))))
