@@ -10,11 +10,8 @@ type t =
   | Real of Real.t
 
 let of_float f = Float (Float.of_float f)
-
-let of_int n = Int (Int.of_int n)
-
+let of_int n   = Int (Int.of_int n)
 let of_int32 n = Int (Int.Int32 n)
-
 let of_int64 n = Int (Int.Int64 n)
 
 let to_string = function
