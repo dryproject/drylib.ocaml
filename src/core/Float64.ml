@@ -4,6 +4,7 @@ module Stdlib = DRY__Stdlib
 
 type t = float
 
-let of_float f = f
+let of_float r = r
+let of_int = Stdlib.float_of_int
 
 let to_string = Stdlib.string_of_float

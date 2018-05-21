@@ -15,3 +15,5 @@ let to_string { numerator; denominator } =
 let parse input =
   try (Ok (Scanf.sscanf input "%d/%u" of_ints)) with
   | Scanf.Scan_failure s -> Error (`Msg s)
+  | End_of_file -> Error (`Msg "end of input")
+  | Failure _ | Invalid_argument _ -> assert false

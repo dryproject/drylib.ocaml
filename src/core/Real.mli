@@ -3,5 +3,6 @@
 type t
 
 val of_float : float -> t
+val of_int : int -> t
 
 val to_string : t -> string
