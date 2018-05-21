@@ -3,5 +3,8 @@
 type t
 
 val of_int : int -> t
+val of_ints : int -> int -> t
 
 val to_string : t -> string
+
+val parse : string -> (t, [`Msg of string]) result
