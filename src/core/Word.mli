@@ -7,3 +7,7 @@ type t =
   | Word64 of Word64.t
 
 val to_string : t -> string
+
+val parse_bin : string -> (t, [`Msg of string]) result
+val parse_oct : string -> (t, [`Msg of string]) result
+val parse_hex : string -> (t, [`Msg of string]) result
