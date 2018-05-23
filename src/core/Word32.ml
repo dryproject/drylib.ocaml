@@ -9,4 +9,7 @@ let of_int     = Stdlib.Int64.of_int
 let of_int32   = Stdlib.Int64.of_int32
 let of_int64 z = z
 
+let as_int64 z = z
+let to_int64 = as_int64
+
 let to_string w = Printf.sprintf "0x%08LX" w

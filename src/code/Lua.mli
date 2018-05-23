@@ -155,6 +155,7 @@ end
 val nil : Expression.t
 val empty_table : Expression.t
 val empty_string : Expression.t
+val zero : Expression.t
 
 val boolean : Boolean.t -> Expression.t
 val number : Number.t -> Expression.t
@@ -162,6 +163,7 @@ val float : Float.t -> Expression.t
 val integer : Integer.t -> Expression.t
 val string : String.t -> Expression.t
 val var : string -> Expression.t
+val call : string -> Expression.t list -> Expression.t
 
 val of_bool : bool -> Expression.t
 val of_float : float -> Expression.t

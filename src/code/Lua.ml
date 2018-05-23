@@ -282,20 +282,23 @@ module Block = struct
     to_code code |> Format.pp_print_string ppf
 end
 
-let nil = Expression.Literal Value.Nil
-let empty_table = Expression.Literal Value.Table
-let empty_string = Expression.Literal (Value.String "")
 let boolean b = Expression.Literal (Value.of_bool b)
 let number n = Expression.Literal (Value.Number n)
 let float r = number (Number.Float r)
 let integer z = number (Number.Integer z)
 let string s = Expression.Literal (Value.String s)
 let var name = Expression.Variable (Name.of_string name)
+let call name args = Expression.FunctionCall (Name.of_string name, args)
 
 let of_bool = boolean
 let of_float r = number (Number.of_float r)
 let of_int z = number (Number.of_int z)
 let of_string = string
+
+let nil = Expression.Literal Value.Nil
+let empty_table = Expression.Literal Value.Table
+let empty_string = Expression.Literal (Value.String "")
+let zero = of_int 0
 
 let to_code = Expression.to_code
 let to_string = Expression.to_string

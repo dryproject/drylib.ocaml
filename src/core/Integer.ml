@@ -2,7 +2,9 @@
 
 type t = { value: Int64.t } (* TODO *)
 
-let of_int n = { value = Int64.of_int n }
+let of_int z   = { value = Int64.of_int z }
+let of_int32 z = { value = Int64.of_int32 z }
+let of_int64 z = { value = z }
 
 let zero = of_int 0
 

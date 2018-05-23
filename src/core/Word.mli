@@ -6,6 +6,9 @@ type t =
   | Word32 of Word32.t
   | Word64 of Word64.t
 
+val as_int64  : t -> int64 (*Int64.t*)
+
+val to_int64  : t -> int64 (*Int64.t*)
 val to_string : t -> string
 
 val parse_bin : string -> (t, [`Msg of string]) result

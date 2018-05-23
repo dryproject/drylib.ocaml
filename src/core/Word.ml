@@ -9,6 +9,14 @@ type t =
   | Word32 of Word32.t
   | Word64 of Word64.t
 
+let as_int64 = function
+  | Word8 w   -> Word8.as_int64 w
+  | Word16 w  -> Word16.as_int64 w
+  | Word32 w  -> Word32.as_int64 w
+  | Word64 w  -> Word64.as_int64 w
+
+let to_int64 = as_int64
+
 let to_string = function
   | Word8 w   -> Word8.to_string w
   | Word16 w  -> Word16.to_string w

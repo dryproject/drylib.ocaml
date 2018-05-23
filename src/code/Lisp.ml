@@ -3,6 +3,7 @@
 (* See: http://www.lispworks.com/documentation/HyperSpec/Front/index.htm *)
 (* See: http://cltl2.lisp.se/cltl/cltl2.html *)
 (* See: http://sellout.github.io/2012/03/03/common-lisp-type-hierarchy/ *)
+(* See: https://docs.google.com/document/pub?id=1SYSr0KE8iyv61srv6AMm-YRr-O6zM7Oi6CLSJgZc9yc *)
 
 open DRY__Core
 
