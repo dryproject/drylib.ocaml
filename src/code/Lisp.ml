@@ -117,6 +117,7 @@ let character c = Object.Atom (Atom.Character c)
 let number n = Object.Atom (Atom.Number n)
 let string s = Object.Atom (Atom.String s)
 let symbol s = Object.Atom (Atom.Symbol s)
+let keyword s = Object.Atom (Atom.Symbol (Symbol.of_string (":" ^ s)))
 
 let of_bool   = Expression.of_bool
 let of_char   = Expression.of_char

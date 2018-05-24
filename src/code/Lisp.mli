@@ -86,6 +86,7 @@ val character : Character.t -> Expression.t
 val number : Number.t -> Expression.t
 val string : String.t -> Expression.t
 val symbol : Symbol.t -> Expression.t
+val keyword : String.t -> Expression.t
 
 val of_bool : bool -> Expression.t
 val of_char : char -> Expression.t
